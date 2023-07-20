@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:background="@android:color/white"
+android:paddingLeft="10pt"
+android:paddingTop="2pt"
+android:paddingRight="10pt"
+android:paddingBottom="2pt"
+tools:context=".MainActivity">
+
+<com.example.androiddemos.fragmenttest.view.Progress
+    android:id="@+id/bar"
+    android:layout_width="match_parent"
+    android:layout_height="24dp"
+    android:layout_marginTop="100dp"
+    app:backColor="@color/black"
+    app:barColor="#234567"
+    app:textColor="@color/white"
+
+    />
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text="@string/reset" />
+
+</RelativeLayout>
