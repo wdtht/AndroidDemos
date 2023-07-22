@@ -13,9 +13,6 @@
         android:theme="@style/Theme.AndroidDemos"
         tools:targetApi="31">
         <activity
-            android:name=".fragmenttest.FragmentTestActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AndroidDemos">
@@ -25,6 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".fragmenttest.FragmentTestActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
