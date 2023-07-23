@@ -7,8 +7,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.androiddemos.R;
+
+import org.w3c.dom.Text;
+
+import java.util.Objects;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +35,7 @@ public class OkhttpFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private TextView responseText;
 
     public OkhttpFragment() {
         // Required empty public constructor
@@ -61,6 +72,38 @@ public class OkhttpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_okhttp, container, false);
+        View view=inflater.inflate(R.layout.fragment_okhttp, container, false);
+        if(view!=null){
+            Button okhttpBtn = view.findViewById(R.id.okhttp_btn);
+            responseText=view.findViewById(R.id.responseText);
+            okhttpBtn.setOnClickListener(v -> {
+                sendRequestOkhttp();
+            });
+        }
+        return view;
+    }
+
+    private void sendRequestOkhttp(){
+        new Thread(() -> {
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url("https://www.baidu.com")
+                        .build();
+                Response response = client.newCall(request).execute();
+                assert response.body() != null;
+                String responseData = response.body().string();
+                showResponse(responseData);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void showResponse(String response){
+        requireActivity().runOnUiThread(()->{
+            responseText.setText(response);
+        });
     }
 }
