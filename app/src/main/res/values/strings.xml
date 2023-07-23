@@ -5,4 +5,7 @@
     <string name="replace_fragment">replace_fragment</string>
     <string name="reset">reset</string>
     <string name="send_okhttp_request">Send okhttp request</string>
+    <string name="network_menu_action_okhttp">okhttp</string>
+    <string name="network_menu_action_retrofit">retrofit</string>
+    <string name="network_menu_action_okgo">okgo</string>
 </resources>
