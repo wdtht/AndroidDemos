@@ -1,4 +1,4 @@
-package com.example.androiddemos;
+package com.example.androiddemos.main.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +8,13 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androiddemos.R;
+
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class SimpleRecycleViewAdapter extends RecyclerView.Adapter<SimpleRecycleViewAdapter.ViewHolder> {
-    private ViewData[] viewDataList;
+    private List<ViewData> viewDataList;
 
     @NonNull
     @Override
@@ -22,16 +25,16 @@ public class SimpleRecycleViewAdapter extends RecyclerView.Adapter<SimpleRecycle
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.button.setText(viewDataList[position].buttonText);
-        holder.button.setOnClickListener(viewDataList[position].callbackWeakReference.get());
+        holder.button.setText(viewDataList.get(position).buttonText);
+        holder.button.setOnClickListener(viewDataList.get(position).callbackWeakReference.get());
     }
 
     @Override
     public int getItemCount() {
-        return viewDataList.length;
+        return viewDataList.size();
     }
 
-    public void setViewDataList(ViewData[] viewDataList){
+    public void setViewDataList(List<ViewData> viewDataList){
         this.viewDataList = viewDataList;
         notifyDataSetChanged();
     }

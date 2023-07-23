@@ -9,9 +9,9 @@ android:paddingLeft="10pt"
 android:paddingTop="2pt"
 android:paddingRight="10pt"
 android:paddingBottom="2pt"
-tools:context=".MainActivity">
+tools:context=".main.activity.MainActivity">
 
-<com.example.androiddemos.fragmenttest.view.Progress
+<com.example.androiddemos.view.Progress
     android:id="@+id/bar"
     android:layout_width="match_parent"
     android:layout_height="24dp"

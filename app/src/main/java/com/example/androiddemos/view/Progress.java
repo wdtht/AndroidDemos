@@ -1,4 +1,4 @@
-package com.example.androiddemos.fragmenttest.view;
+package com.example.androiddemos.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
