@@ -11,6 +11,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 
 import com.example.androiddemos.BaseActivity;
 import com.example.androiddemos.R;
@@ -25,6 +27,8 @@ import java.util.List;
 public class NetworkActivity extends BaseActivity {
     private ViewPager2 viewPager;
     private BottomNavigationView bottomNavigationView;
+
+    private static final String TAG = NetworkActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class NetworkActivity extends BaseActivity {
 
     private void bindViewPagerAndBottomNavigationView(ViewPager2 viewPager, BottomNavigationView bottomNavigationView){
         bottomNavigationView.setOnItemSelectedListener(item -> {
+            Log.i(TAG, "bindViewPagerAndBottomNavigationView: item.getOrder" + item.getOrder());
             viewPager.setCurrentItem(item.getOrder());
             return true;
         });
@@ -75,9 +80,9 @@ public class NetworkActivity extends BaseActivity {
     private void fillDataIntoViewPagerAndBottomNavigationView(ViewPager2 viewPager, BottomNavigationView bottomNavigationView, List<ViewPagerData> viewPagerDataList){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),getLifecycle());
         viewPager.setAdapter(viewPagerAdapter);
-        for (ViewPagerData viewPagerData :
-                viewPagerDataList) {
-            bottomNavigationView.getMenu().add(viewPagerData.textId).setIcon(viewPagerData.imageId);
+        for (int i = 0; i < viewPagerDataList.size(); i++) {
+            ViewPagerData viewPagerData = viewPagerDataList.get(i);
+            bottomNavigationView.getMenu().add(Menu.NONE,Menu.NONE,i,viewPagerData.textId).setIcon(viewPagerData.imageId);
             viewPagerAdapter.addFragment(viewPagerData.fragmentClass);
         }
     }
