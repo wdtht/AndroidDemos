@@ -2,22 +2,28 @@ package com.example.androiddemos.network.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androiddemos.R;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -38,6 +44,7 @@ public class OkhttpFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private TextView responseText;
+    private  Button okhttpBtn;
     private final String Tag = "superdemo/OkhttpFragment";
 
     public OkhttpFragment() {
@@ -77,31 +84,48 @@ public class OkhttpFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_okhttp, container, false);
         if (view != null) {
-            Button okhttpBtn = view.findViewById(R.id.okhttp_btn);
+            okhttpBtn = view.findViewById(R.id.okhttp_btn);
             responseText = view.findViewById(R.id.responseText);
             okhttpBtn.setOnClickListener(v -> {
                 Log.d(Tag,"okhttpBtn clink");
-                sendRequestOkhttp();
+                sendGetRequestOkhttp();
             });
         }
         return view;
     }
 
-    private void sendRequestOkhttp() {
+    private void sendGetRequestOkhttp() {
         new Thread(() -> {
             try {
                 Log.d(Tag,"#sendRequestOkhttp");
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("https://www.baidu.com")
+                        .url("https://www.baidu.com/")
                         .build();
-                Response response = client.newCall(request).execute();
-                Log.d(Tag,"#sendRequestOkhttp responseData:" +response.body());
-                assert response.body() != null;
-                String responseData = response.body().string();
+                //Response response = client.newCall(request).execute();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        Log.d(Tag,"#onFailure");
+                        Looper.prepare();
+                        Toast.makeText(getActivity(),"request fail!", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    }
 
-                showResponse(responseData);
-
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        Log.d(Tag,"#onResponse");
+                        assert response.body() != null;
+                        //Log.d(Tag,"#sendRequestOkhttp responseData:" +response.body().string());//切记不能打印出来，string()只能调用一次，不然会崩
+                        //可参考：https://blog.csdn.net/weixin_38629529/article/details/89789405
+                        String responseData = response.body().string();
+                        Log.d(Tag,"#onResponse responseData:"+responseData);
+                        Looper.prepare();
+                        Toast.makeText(getActivity(),"request success!", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                        showResponse(responseData);
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -111,7 +135,6 @@ public class OkhttpFragment extends Fragment {
     private void showResponse(String response) {
         Log.d(Tag,"#showResponse response:"+response);
         requireActivity().runOnUiThread(() -> {
-            Log.d(Tag,"#showResponse response:"+response);
             responseText.setText(response);
         });
     }
