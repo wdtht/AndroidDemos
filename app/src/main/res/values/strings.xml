@@ -4,10 +4,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="replace_fragment">replace_fragment</string>
     <string name="reset">reset</string>
-    <string name="send_okhttp_request">get</string>
+    <string name="send_okhttp_request">Send okhttp request</string>
     <string name="network_menu_action_okhttp">okhttp</string>
     <string name="network_menu_action_retrofit">retrofit</string>
     <string name="network_menu_action_okgo">okgo</string>
+    <string name="retrofit_request">retrofit_request</string>
     <string name="_1_demo_get_post_okhttp3">说明：1.本demo包含get,post,以及okhttp3相关。</string>
     <string name="post">post</string>
 </resources>

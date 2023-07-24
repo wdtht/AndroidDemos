@@ -56,7 +56,6 @@ public class NetworkActivity extends BaseActivity {
         bindViewPagerAndBottomNavigationView(viewPager, bottomNavigationView);
         fillDataIntoViewPagerAndBottomNavigationView(viewPager, bottomNavigationView,viewPagerDataList);
     }
-
     private void bindViewPagerAndBottomNavigationView(ViewPager2 viewPager, BottomNavigationView bottomNavigationView){
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Log.i(TAG, "bindViewPagerAndBottomNavigationView: item.getOrder" + item.getOrder());
@@ -73,6 +72,7 @@ public class NetworkActivity extends BaseActivity {
         viewPager.registerOnPageChangeCallback(onPageChangeCallback);
         getLifecycle().addObserver((LifecycleEventObserver) (source, event) -> {
             if(Lifecycle.Event.ON_DESTROY == event){
+                Log.i(TAG, "NetworkActivity onDestroy bindViewPagerAndBottomNavigationView: viewPager.isActivated: " + viewPager.isActivated());
                 viewPager.unregisterOnPageChangeCallback(onPageChangeCallback);
             }
         });

@@ -15,15 +15,11 @@
         android:theme="@style/Theme.AndroidDemos"
         tools:targetApi="31">
         <activity
-            android:name=".BaseActivity"
-            android:exported="false" />
-        <activity
             android:name=".network.activity.NetworkActivity"
             android:exported="false" />
         <activity
             android:name=".main.activity.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AndroidDemos">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
