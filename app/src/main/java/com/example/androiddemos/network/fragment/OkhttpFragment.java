@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.example.androiddemos.R;
 import org.w3c.dom.Text;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -36,6 +38,7 @@ public class OkhttpFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private TextView responseText;
+    private final String Tag = "superdemo/OkhttpFragment";
 
     public OkhttpFragment() {
         // Required empty public constructor
@@ -72,37 +75,43 @@ public class OkhttpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_okhttp, container, false);
-        if(view!=null){
+        View view = inflater.inflate(R.layout.fragment_okhttp, container, false);
+        if (view != null) {
             Button okhttpBtn = view.findViewById(R.id.okhttp_btn);
-            responseText=view.findViewById(R.id.responseText);
+            responseText = view.findViewById(R.id.responseText);
             okhttpBtn.setOnClickListener(v -> {
+                Log.d(Tag,"okhttpBtn clink");
                 sendRequestOkhttp();
             });
         }
         return view;
     }
 
-    private void sendRequestOkhttp(){
+    private void sendRequestOkhttp() {
         new Thread(() -> {
             try {
+                Log.d(Tag,"#sendRequestOkhttp");
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
                         .url("https://www.baidu.com")
                         .build();
                 Response response = client.newCall(request).execute();
+                Log.d(Tag,"#sendRequestOkhttp responseData:" +response.body());
                 assert response.body() != null;
                 String responseData = response.body().string();
+
                 showResponse(responseData);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
+        }).start();
     }
 
-    private void showResponse(String response){
-        requireActivity().runOnUiThread(()->{
+    private void showResponse(String response) {
+        Log.d(Tag,"#showResponse response:"+response);
+        requireActivity().runOnUiThread(() -> {
+            Log.d(Tag,"#showResponse response:"+response);
             responseText.setText(response);
         });
     }
