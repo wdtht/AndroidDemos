@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.androiddemos.R;
 import com.example.androiddemos.view.Progress;
+import com.example.androiddemos.view.RoundProgressBar;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +31,7 @@ public class ProgressPercentFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Progress bar;
+    private RoundProgressBar roundBar;
     private Button btn;
     private int progress;
     private Timer timer;
@@ -73,6 +75,7 @@ public class ProgressPercentFragment extends Fragment {
         // Inflate the layout for this fragment
         if(view!=null){
             bar = view.findViewById(R.id.bar);
+            roundBar = view.findViewById(R.id.id_round_progressbar);
             btn = view.findViewById(R.id.btn);
         }
         btn.setOnClickListener(view1 -> reset());
@@ -93,6 +96,7 @@ public class ProgressPercentFragment extends Fragment {
             @Override
             public void run() {
                 bar.setProgress(progress);
+                roundBar.setProgress(progress);
                 progress++;
                 if (progress > 100) {
                     timer.cancel();

@@ -25,8 +25,24 @@ tools:context=".main.activity.MainActivity">
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
         android:text="@string/reset" />
+
+    <com.example.androiddemos.view.RoundProgressBar
+        android:id="@+id/id_round_progressbar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="300dp"
+        android:layout_centerHorizontal="true"
+        app:radius="40dp"
+        app:ringWidth="10dp"
+        app:startAngle="-90"
+        app:centerColor="#F6F6F4"
+        app:ringColor="#E1ACACAE"
+        app:progressColor="#E1513FEC"
+        app:roundTextColor="#000000"
+        app:textSize="20sp"
+        app:isTextDisplay="true"/>
 
 </RelativeLayout>

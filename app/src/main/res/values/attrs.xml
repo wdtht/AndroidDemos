@@ -5,4 +5,15 @@
         <attr name="barColor" format="color"/>
         <attr name="textColor" format="color"/>
     </declare-styleable>
+    <declare-styleable name="RoundProgressBar">
+        <attr name="startAngle" format="integer"/>
+        <attr name="radius" format="dimension"/>
+        <attr name="ringWidth" format="dimension"/>
+        <attr name="centerColor" format="color"/>
+        <attr name="ringColor" format="color"/>
+        <attr name="progressColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="roundTextColor" format="color"/>
+        <attr name="isTextDisplay" format="boolean"/>
+    </declare-styleable>
 </resources>

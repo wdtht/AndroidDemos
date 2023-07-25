@@ -14,6 +14,8 @@
         android:layout_height="wrap_content"
         tools:text="33333"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_shape"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
