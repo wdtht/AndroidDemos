@@ -1,0 +1,8 @@
+本项目demo目录：
+1.进度条：长条形和圆形的
+2.网络请求demo，okgo,okhttp,retrofit(gson)
+3.数据库的使用
+4.mvvm,jetpack
+5.rxjava
+6.Mqtt
+7.Eventbus
