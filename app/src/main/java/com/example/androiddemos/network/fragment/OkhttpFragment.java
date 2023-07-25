@@ -16,13 +16,19 @@ import android.widget.Toast;
 
 import com.example.androiddemos.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -41,8 +47,9 @@ public class OkhttpFragment extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
     private TextView responseText;
-    private  Button okhttpBtnGet;
-    private  Button okhttpBtnPost;
+    private Button okhttpBtnGet;
+    private Button okhttpBtnPost;
+    private OkHttpClient client;
 
     private final String Tag = "superdemo/OkhttpFragment";
 
@@ -82,7 +89,7 @@ public class OkhttpFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_okhttp, container, false);
-        if(view!=null){
+        if (view != null) {
             okhttpBtnGet = view.findViewById(R.id.okhttp_btn_get);
             okhttpBtnPost = view.findViewById(R.id.okhttp_btn_post);
             responseText = view.findViewById(R.id.response_text);
@@ -94,9 +101,9 @@ public class OkhttpFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.okhttp_btn_get){
+        if (v.getId() == R.id.okhttp_btn_get) {
             sendGetRequestOkhttp();
-        }else if(v.getId() == R.id.okhttp_btn_post){
+        } else if (v.getId() == R.id.okhttp_btn_post) {
             sendPostRequestOkhttp();
         }
     }
@@ -104,54 +111,98 @@ public class OkhttpFragment extends Fragment implements View.OnClickListener {
     private void sendGetRequestOkhttp() {
         new Thread(() -> {
             try {
-                Log.d(Tag,"#sendRequestOkhttp");
-                OkHttpClient client = new OkHttpClient();
+                Log.d(Tag, "#sendRequestOkhttp");
+                if (client == null) {
+                    client = new OkHttpClient();
+                }
                 client.newBuilder().connectTimeout(10, TimeUnit.SECONDS);
-                client.newBuilder().readTimeout(10,TimeUnit.SECONDS);
-                client.newBuilder().writeTimeout(10,TimeUnit.SECONDS);
+                client.newBuilder().readTimeout(10, TimeUnit.SECONDS);
+                client.newBuilder().writeTimeout(10, TimeUnit.SECONDS);
                 Request request = new Request.Builder()
                         .url("https://www.baidu.com")
                         .build();
                 //Response response = client.newCall(request).execute();//同步方法
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                        Log.d(Tag,"#onFailure");
-                        Looper.prepare();
-                        Toast.makeText(getActivity(),"request fail!", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    }
-
-                    @Override
-                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                        Log.d(Tag,"#onResponse");
-                        assert response.body() != null;
-                        //Log.d(Tag,"#sendRequestOkhttp responseData:" +response.body().string());//切记不能打印出来，string()只能调用一次，不然会崩
-                        //可参考：https://blog.csdn.net/weixin_38629529/article/details/89789405
-                        String responseData = response.body().string();
-                        Log.d(Tag,"#onResponse responseData:"+responseData);
-//                        Looper.prepare();
-//                        Toast.makeText(getActivity(),"request success!", Toast.LENGTH_SHORT).show();
-//                        Looper.loop();
-                        showResponse(responseData);
-                    }
-                });
+                resquestCall(request);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
     }
 
-    private void showResponse(final String response) {
-        Log.d(Tag,"#showResponse response:"+response);
-        getActivity().runOnUiThread(() -> {
-            Toast.makeText(getActivity(),"request success!", Toast.LENGTH_SHORT).show();
-            responseText.setText(response);
+    private void sendPostRequestOkhttp() {
+        //另一种写法
+//        final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+//        JSONObject json = new JSONObject();
+//        try {
+//            json.put("username", "admin");
+//            json.put("password", "admin");
+//        } catch (JSONException e) {
+//            Log.e(Tag, "shareNavLine() exp= " + e.getMessage());
+//            return;
+//        }
+//        Log.e(Tag, "shareNavLine() jsonStr= " + String.valueOf(json));
+//        RequestBody body = RequestBody.create(JSON, String.valueOf(json));
+//        Request request = new Request.Builder()
+//                .url("http://www.jianshu.com/")
+//                .post(body)
+//                .build();
+
+        Log.d(Tag, "#sendPostRequestOkhttp");
+        new Thread(()->{
+            try {
+                if (client == null) {
+                    client = new OkHttpClient();
+                }
+
+                FormBody formBody = new FormBody.Builder()
+                        .add("username", "admin")
+                        .add("password", "admin")
+                        .build();
+
+                final Request request = new Request.Builder()
+                        .url("https://api.github.com/")
+                        .post(formBody)
+                        .build();
+                resquestCall(request);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private void resquestCall(Request request) {
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d(Tag, "#onFailure");
+                Looper.prepare();
+                Toast.makeText(getActivity(), "request fail!", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                Log.d(Tag, "#onResponse");
+                assert response.body() != null;
+                Log.d(Tag, "#onResponse code:" + response.code());
+                //Log.d(Tag,"#sendRequestOkhttp responseData:" +response.body().string());//切记不能打印出来，string()只能调用一次，不然会崩
+                //可参考：https://blog.csdn.net/weixin_38629529/article/details/89789405
+                String responseData = response.body().string();
+                Log.d(Tag, "#onResponse responseData:" + responseData);
+//                        Looper.prepare();
+//                        Toast.makeText(getActivity(),"request success!", Toast.LENGTH_SHORT).show();
+//                        Looper.loop();
+                showResponse(responseData);
+            }
         });
     }
 
-    private void sendPostRequestOkhttp(){
-
+    private void showResponse(final String response) {
+        Log.d(Tag, "#showResponse response:" + response);
+        getActivity().runOnUiThread(() -> {
+            Toast.makeText(getActivity(), "request success!", Toast.LENGTH_SHORT).show();
+            responseText.setText(response);
+        });
     }
 
 }
