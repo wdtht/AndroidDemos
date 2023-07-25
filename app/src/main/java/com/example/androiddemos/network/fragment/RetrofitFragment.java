@@ -6,10 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.androiddemos.R;
 import com.example.androiddemos.databinding.FragmentRetrofitBinding;
@@ -48,11 +50,12 @@ public class RetrofitFragment extends Fragment {
                 Log.i(TAG, "onCreate: gitHubService.listRepos: response:" + response);
                 assert response.body() != null;
                 binding.textView.setText(response.body().toString());
+                Toast.makeText(getActivity(),"request success!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Repo>> call, @NonNull Throwable t) {
-
+                Toast.makeText(getActivity(),"request fail!", Toast.LENGTH_SHORT).show();
             }
         });
     }

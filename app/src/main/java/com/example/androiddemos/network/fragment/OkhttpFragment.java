@@ -16,12 +16,8 @@ import android.widget.Toast;
 
 import com.example.androiddemos.R;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -96,6 +92,15 @@ public class OkhttpFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.okhttp_btn_get){
+            sendGetRequestOkhttp();
+        }else if(v.getId() == R.id.okhttp_btn_post){
+            sendPostRequestOkhttp();
+        }
+    }
+
     private void sendGetRequestOkhttp() {
         new Thread(() -> {
             try {
@@ -145,14 +150,6 @@ public class OkhttpFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.okhttp_btn_get){
-            sendGetRequestOkhttp();
-        }else if(v.getId() == R.id.okhttp_btn_post){
-            sendPostRequestOkhttp();
-        }
-    }
     private void sendPostRequestOkhttp(){
 
     }
