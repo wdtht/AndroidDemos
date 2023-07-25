@@ -1,28 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".network.fragment.OkhttpFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".network.fragment.OkhttpFragment">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/okhttp_btn"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center"
-        android:text="@string/send_okhttp_request"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/_1_demo_get_post_okhttp3"
+        android:textColor="@color/black" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/okhttp_btn_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/send_okhttp_request"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/btn_shape"/>
+        <Button
+            android:id="@+id/okhttp_btn_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/post"
+            app:layout_constraintEnd_toStartOf="@+id/okhttp_btn_get"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/btn_shape"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
         <TextView
+            android:id="@+id/response_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/responseText"
-            android:textColor="@color/black"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            tools:text="3445455"/>
+            android:textColor="@color/black" />
     </ScrollView>
 </LinearLayout>

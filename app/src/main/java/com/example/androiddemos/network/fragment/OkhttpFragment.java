@@ -20,6 +20,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import okhttp3.Call;
@@ -33,7 +34,7 @@ import okhttp3.Response;
  * Use the {@link OkhttpFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OkhttpFragment extends Fragment {
+public class OkhttpFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,7 +45,9 @@ public class OkhttpFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private TextView responseText;
-    private  Button okhttpBtn;
+    private  Button okhttpBtnGet;
+    private  Button okhttpBtnPost;
+
     private final String Tag = "superdemo/OkhttpFragment";
 
     public OkhttpFragment() {
@@ -83,13 +86,12 @@ public class OkhttpFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_okhttp, container, false);
-        if (view != null) {
-            okhttpBtn = view.findViewById(R.id.okhttp_btn);
-            responseText = view.findViewById(R.id.responseText);
-            okhttpBtn.setOnClickListener(v -> {
-                Log.d(Tag,"okhttpBtn clink");
-                sendGetRequestOkhttp();
-            });
+        if(view!=null){
+            okhttpBtnGet = view.findViewById(R.id.okhttp_btn_get);
+            okhttpBtnPost = view.findViewById(R.id.okhttp_btn_post);
+            responseText = view.findViewById(R.id.response_text);
+            okhttpBtnPost.setOnClickListener(this);
+            okhttpBtnGet.setOnClickListener(this);
         }
         return view;
     }
@@ -99,10 +101,13 @@ public class OkhttpFragment extends Fragment {
             try {
                 Log.d(Tag,"#sendRequestOkhttp");
                 OkHttpClient client = new OkHttpClient();
+                client.newBuilder().connectTimeout(10, TimeUnit.SECONDS);
+                client.newBuilder().readTimeout(10,TimeUnit.SECONDS);
+                client.newBuilder().writeTimeout(10,TimeUnit.SECONDS);
                 Request request = new Request.Builder()
-                        .url("https://www.baidu.com/")
+                        .url("https://www.baidu.com")
                         .build();
-                //Response response = client.newCall(request).execute();
+                //Response response = client.newCall(request).execute();//同步方法
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -120,9 +125,9 @@ public class OkhttpFragment extends Fragment {
                         //可参考：https://blog.csdn.net/weixin_38629529/article/details/89789405
                         String responseData = response.body().string();
                         Log.d(Tag,"#onResponse responseData:"+responseData);
-                        Looper.prepare();
-                        Toast.makeText(getActivity(),"request success!", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
+//                        Looper.prepare();
+//                        Toast.makeText(getActivity(),"request success!", Toast.LENGTH_SHORT).show();
+//                        Looper.loop();
                         showResponse(responseData);
                     }
                 });
@@ -132,10 +137,24 @@ public class OkhttpFragment extends Fragment {
         }).start();
     }
 
-    private void showResponse(String response) {
+    private void showResponse(final String response) {
         Log.d(Tag,"#showResponse response:"+response);
-        requireActivity().runOnUiThread(() -> {
+        getActivity().runOnUiThread(() -> {
+            Toast.makeText(getActivity(),"request success!", Toast.LENGTH_SHORT).show();
             responseText.setText(response);
         });
     }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.okhttp_btn_get){
+            sendGetRequestOkhttp();
+        }else if(v.getId() == R.id.okhttp_btn_post){
+            sendPostRequestOkhttp();
+        }
+    }
+    private void sendPostRequestOkhttp(){
+
+    }
+
 }
