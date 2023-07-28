@@ -15,7 +15,7 @@
         android:theme="@style/Theme.AndroidDemos"
         tools:targetApi="31">
         <activity
-            android:name=".jetpack.activity.JetpackMainActivity"
+            android:name=".jetpack.activity.LivedataMainActivity"
             android:exported="false" />
         <activity
             android:name=".network.activity.NetworkActivity"

@@ -16,4 +16,9 @@
         <attr name="roundTextColor" format="color"/>
         <attr name="isTextDisplay" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="RoundView">
+        <attr name="viewRadius" format="dimension"/>
+        <attr name="viewColor" format="color"/>
+    </declare-styleable>
 </resources>
