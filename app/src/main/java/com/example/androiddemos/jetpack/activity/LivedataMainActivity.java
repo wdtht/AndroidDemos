@@ -67,6 +67,7 @@ public class LivedataMainActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v.getId() == R.id.change_color){
             Log.d(TAG, "onClick change_color");
+            //setValue()要在主线程中调用，而postValue()既可在主线程也可在子线程中调用
             livedataViewModel.getChangeColor().setValue("#989877");
         } else if (v.getId() == R.id.control_btn) {
             Log.d(TAG, "onClick control_btn");
