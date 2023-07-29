@@ -16,7 +16,6 @@ import com.example.androiddemos.R;
 import com.example.androiddemos.jetpack.model.LivedataModel;
 import com.example.androiddemos.jetpack.viewmodel.LivedataViewModel;
 import com.example.androiddemos.view.RoundView;
-//上面的圆选择后存进数据库，下面的圆在界面进行判断
 /**
  * 游戏设计：1.一进来有一个弹窗需要输入名字，点击确认，页面显示当前玩游戏的人是谁，游戏开始，可以选上面的圆切换颜色，点击开始，下面的圆颜色会变，当变
  * 的时候点击停止，若上下两个圆一样就可以继续玩，当出现无法上下一致的时候，一局结束，记录连续选中次数，弹框游戏结束，共连续多少次，下一位玩家谁：输入

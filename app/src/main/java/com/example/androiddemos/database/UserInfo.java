@@ -11,11 +11,11 @@ import androidx.room.PrimaryKey;
  * @date :2023/7/28
  */
 //Entity 可以看成是数据库中的表
-@Entity(tableName = "color_info")
-public class ColorInfo {
+@Entity(tableName = "user_info")
+public class UserInfo {
     @PrimaryKey
-    @ColumnInfo(name = "change_color")
-    public long changeColor;
-    @ColumnInfo(name = "select_color")
-    public String selectColor;
+    @ColumnInfo(name = "name")
+    public long name;
+    @ColumnInfo(name = "score")
+    public String score;
 }
