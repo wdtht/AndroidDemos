@@ -35,7 +35,7 @@ public interface UserDao {
      * @return
      */
     @Query("SELECT score FROM user_info WHERE name = :name")
-    long queryUserOfScore(String name);
+    long getScoreByUserName(String name);
 
     //排序，按分数从大到小排序
     @Query("SELECT * FROM user_info ORDER BY score DESC")
