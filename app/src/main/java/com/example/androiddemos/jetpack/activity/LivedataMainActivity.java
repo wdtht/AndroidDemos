@@ -43,8 +43,8 @@ public class LivedataMainActivity extends BaseActivity implements View.OnClickLi
         selectView = (RoundView)findViewById(R.id.select_color);
         changeView = (RoundView)findViewById(R.id.change_color);
         controlButton =(Button) findViewById(R.id.control_btn);
-        EditPop editPop=new EditPop(this);
-        editPop.setAutoEdit(true).show();
+//        EditPop editPop=new EditPop(this);
+//        editPop.setAutoEdit(true).show();
         changeView.setOnClickListener(this);
         controlButton.setOnClickListener(this);
         LivedataModel livedataModel = new LivedataModel();

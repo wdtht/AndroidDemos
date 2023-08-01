@@ -11,7 +11,6 @@ import com.example.androiddemos.BaseActivity;
 import com.example.androiddemos.R;
 
 public class CustomViewActivity extends BaseActivity {
-    private Button progressBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

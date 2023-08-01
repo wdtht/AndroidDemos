@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AndroidDemos"
         tools:targetApi="31">
         <activity
+            android:name=".customview.activity.DragListActivity"
+            android:exported="false" />
+        <activity
             android:name=".jetpack.activity.LivedataMainActivity"
             android:exported="false" />
         <activity
