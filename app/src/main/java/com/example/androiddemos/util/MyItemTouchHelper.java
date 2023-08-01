@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androiddemos.customview.activity.DragListActivity;
 import com.example.androiddemos.customview.adapter.DragListAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,13 +22,14 @@ import java.util.List;
  */
 public class MyItemTouchHelper extends ItemTouchHelper.Callback {
     private List<String> list;
+    private final String TAG = "superdemo/MyItemTouchHelper";
     private DragListAdapter recycleViewAdapter;
     private RequestDouble<Integer, Integer> mRequestResult;
     private int longClickPosition = -1;
     DragListActivity activity;
 
     public MyItemTouchHelper(DragListActivity activity, List<String> list, DragListAdapter recycleViewAdapter, RequestDouble<Integer, Integer> requestResult) {
-        Log.d("dddd", "into MyItemTouchHelper");
+        Log.d(TAG, "into MyItemTouchHelper");
         this.list = list;
         this.recycleViewAdapter = recycleViewAdapter;
         this.activity = activity;
@@ -66,22 +68,24 @@ public class MyItemTouchHelper extends ItemTouchHelper.Callback {
         int fromPosition = viewHolder.getAdapterPosition();
         //拿到当前拖拽到的item的viewHolder
         int toPosition = target.getAdapterPosition();
+        Log.d(TAG, "fromPosition："+fromPosition);
+        Log.d(TAG, "toPosition："+toPosition);
         if (fromPosition < toPosition) {
             for (int i = fromPosition; i < toPosition; i++) {
                 //这里暂时注释，用外面的数据来进行交换
-                //  Collections.swap(list, i, i + 1);
+                 Collections.swap(list, i, i + 1);
             }
         } else {
             for (int i = fromPosition; i > toPosition; i--) {
                 //这里暂时注释，用外面的数据来进行交换
-                //  Collections.swap(list, i, i - 1);
+                Collections.swap(list, i, i - 1);
             }
         }
         int movementFlags = getMovementFlags(recyclerView, viewHolder);
-        Log.d("dddd=============", " movementFlags = " + movementFlags);
+        Log.d(TAG, " movementFlags = " + movementFlags);
         //通知适配器改变位置
         recycleViewAdapter.notifyItemMoved(fromPosition, toPosition);
-        Log.d("dddd=============", " fromPosition = " + fromPosition + " toPosition" + toPosition);
+        Log.d(TAG, " fromPosition = " + fromPosition + " toPosition" + toPosition);
         return true;
     }
 

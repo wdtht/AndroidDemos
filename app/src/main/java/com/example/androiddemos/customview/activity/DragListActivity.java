@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.androiddemos.BaseActivity;
 import com.example.androiddemos.R;
@@ -49,9 +50,9 @@ public class DragListActivity extends BaseActivity {
         //添加拖拽事件                                                                 longClickPosition：初始索引值            ActionUpPosition：结束索引值
         mItemTouchHelper = new ItemTouchHelper(new MyItemTouchHelper(this,titles,rv_1_homeAdapter,(longClickPosition, ActionUpPosition)-> {
             if (longClickPosition==-1)return;
-
+            Log.d(TAG,"swap longClickPosition:"+longClickPosition+" ActionUpPosition:"+ActionUpPosition);
             //用swap方法可以交换集合中任意两个元素的位置
-            Collections.swap(titles,longClickPosition,ActionUpPosition);
+            //Collections.swap(titles,longClickPosition,ActionUpPosition);
 
             //列表的适配器
             rv_1_homeAdapter.notifyDataSetChanged();
