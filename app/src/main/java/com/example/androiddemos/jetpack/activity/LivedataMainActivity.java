@@ -7,16 +7,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androiddemos.BaseActivity;
 import com.example.androiddemos.R;
-import com.example.androiddemos.constants.ConstKey;
 import com.example.androiddemos.jetpack.model.LivedataModel;
 import com.example.androiddemos.jetpack.viewmodel.LivedataViewModel;
 import com.example.androiddemos.view.EditPop;
+import com.example.androiddemos.view.OnLeftOrRightButtonClick;
 import com.example.androiddemos.view.RoundView;
+import com.lxj.xpopup.XPopup;
 import com.tencent.mmkv.MMKV;
 
 /**
@@ -29,13 +31,13 @@ import com.tencent.mmkv.MMKV;
  * @author chenkexi
  * @date :2023/7/27
  */
-public class LivedataMainActivity extends BaseActivity implements View.OnClickListener {
+public class LivedataMainActivity extends BaseActivity implements View.OnClickListener{
     private LivedataViewModel livedataViewModel;
     private final String TAG = "superdemo/JetpackMainActivity";
     private Button controlButton;
     private RoundView selectView;//下面的圆
     private RoundView changeView;//上面的圆
-
+    private EditPop editPop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +45,25 @@ public class LivedataMainActivity extends BaseActivity implements View.OnClickLi
         selectView = (RoundView)findViewById(R.id.select_color);
         changeView = (RoundView)findViewById(R.id.change_color);
         controlButton =(Button) findViewById(R.id.control_btn);
-//        EditPop editPop=new EditPop(this);
-//        editPop.setAutoEdit(true).show();
+        editPop=new EditPop(this, new OnLeftOrRightButtonClick() {
+            @Override
+            public void onRightClick(String str) {
+                runOnUiThread(()->{
+                            Toast.makeText(LivedataMainActivity.this, str, Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onLeftClick(String str) {
+
+            }
+
+            @Override
+            public void onEditText(String str) {
+
+            }
+        });
+        editPop.show();
         changeView.setOnClickListener(this);
         controlButton.setOnClickListener(this);
         LivedataModel livedataModel = new LivedataModel();
@@ -81,10 +100,11 @@ public class LivedataMainActivity extends BaseActivity implements View.OnClickLi
         if(v.getId() == R.id.change_color){
             Log.d(TAG, "onClick change_color");
             //setValue()要在主线程中调用，而postValue()既可在主线程也可在子线程中调用
-            //livedataViewModel.getChangeColor().setValue("#989877");
+            livedataViewModel.getChangeColor().setValue("#989877");
         } else if (v.getId() == R.id.control_btn) {
             Log.d(TAG, "onClick control_btn");
-            //livedataViewModel.getSelectColor().setValue("#989877");
+            livedataViewModel.getSelectColor().setValue("#989877");
         }
     }
+
 }

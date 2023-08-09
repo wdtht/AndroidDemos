@@ -13,7 +13,7 @@ import androidx.room.RoomDatabase;
  * @date :2023/7/28
  */
 
-@Database(entities = {UserInfo.class}, version = 2, exportSchema = false)
+@Database(entities = {UserInfo.class}, version = 1)
 public abstract class UserDatabase extends RoomDatabase {
     private static UserDatabase instance;//创建单例
 
