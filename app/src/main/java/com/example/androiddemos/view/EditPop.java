@@ -2,6 +2,7 @@ package com.example.androiddemos.view;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.example.androiddemos.R;
 public class EditPop extends Dialog {
 
     private Button btnOk;
+    private final String TAG = "superdemo/EditPop";
     private Button btnCancel;
     private EditText edit;
     private String mContent;
@@ -66,13 +68,12 @@ public class EditPop extends Dialog {
         edit = findViewById(R.id.edit_text);
         btnOk.setOnClickListener(v -> {
             this.onLeftOrRightButtonClick.onRightClick("设置成功！");
+            Log.d(TAG,"edit text:"+edit.getText().toString());
+            this.onLeftOrRightButtonClick.onEditText(edit.getText().toString());
             dismiss();
         });
         btnCancel.setOnClickListener(v -> {
             dismiss();
-        });
-        edit.setOnClickListener(v -> {
-            this.onLeftOrRightButtonClick.onEditText(edit.getText().toString());
         });
     }
 

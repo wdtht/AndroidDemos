@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -37,6 +38,7 @@ public class LivedataMainActivity extends BaseActivity implements View.OnClickLi
     private Button controlButton;
     private RoundView selectView;//下面的圆
     private RoundView changeView;//上面的圆
+    private TextView nowPlayerName;//显示当前玩家是谁
     private EditPop editPop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class LivedataMainActivity extends BaseActivity implements View.OnClickLi
         selectView = (RoundView)findViewById(R.id.select_color);
         changeView = (RoundView)findViewById(R.id.change_color);
         controlButton =(Button) findViewById(R.id.control_btn);
+        nowPlayerName = findViewById(R.id.nowPlayerName);
         editPop=new EditPop(this, new OnLeftOrRightButtonClick() {
             @Override
             public void onRightClick(String str) {
@@ -60,9 +63,10 @@ public class LivedataMainActivity extends BaseActivity implements View.OnClickLi
 
             @Override
             public void onEditText(String str) {
-
+                    nowPlayerName.setText("当前玩家是："+str);
             }
         });
+        editPop.setCanceledOnTouchOutside(false);
         editPop.show();
         changeView.setOnClickListener(this);
         controlButton.setOnClickListener(this);

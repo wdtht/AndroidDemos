@@ -12,8 +12,17 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
+        android:textStyle="bold"
         android:text="小游戏"
         android:textSize="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/nowPlayerName"
+        android:textSize="16dp"
+        android:text="当前玩家："/>
 
     <com.example.androiddemos.view.RoundView
         android:id="@+id/change_color"
