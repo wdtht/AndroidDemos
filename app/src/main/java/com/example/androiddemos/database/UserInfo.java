@@ -13,9 +13,11 @@ import androidx.room.PrimaryKey;
 //Entity 可以看成是数据库中的表
 @Entity(tableName = "user_info")
 public class UserInfo {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    public Long _id;
+
     @ColumnInfo(name = "name")
-    public long name;
+    public String name;
     @ColumnInfo(name = "score")
-    public String score;
+    public long score;
 }

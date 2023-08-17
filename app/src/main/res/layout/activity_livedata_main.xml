@@ -1,58 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".jetpack.activity.LivedataMainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:text="小游戏"
-        android:textSize="20dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/nowPlayerName"
-        android:textSize="16dp"
-        android:text="当前玩家："/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.example.androiddemos.view.RoundView
-        android:id="@+id/change_color"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        app:viewRadius="100dp"
-        app:viewColor="#5E9ACD" />
+    <data>
 
-    <com.example.androiddemos.view.RoundView
-        android:id="@+id/select_color"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="130dp"
-        app:viewRadius="100dp"
-        app:viewColor="#BF2BC5" />
+    </data>
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="小游戏"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/nowPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:text="当前玩家："
+            android:textSize="16dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分数："
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/nowPlayerScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#E31118"
+                android:text="0"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <com.example.androiddemos.view.RoundView
+            android:id="@+id/change_color"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            app:viewColor="#5E9ACD"
+            app:viewRadius="100dp" />
+
+        <com.example.androiddemos.view.RoundView
+            android:id="@+id/select_color"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="130dp"
+            app:viewColor="#BF2BC5"
+            app:viewRadius="100dp" />
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="49dp"
-        android:id="@+id/control_btn"
-        android:background="@drawable/btn_shape"
-        android:text="开始" />
+        <Button
+            android:id="@+id/control_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="49dp"
+            android:background="@drawable/btn_shape"
+            android:text="开始" />
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>

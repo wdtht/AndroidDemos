@@ -28,6 +28,7 @@ public class DemoApplication extends Application {
         super.onCreate();
         Log.d("TAG","#onCreate-----");
         //mmkv 存储键值对，初始化
+        instance=this;
         MMKV.initialize(this);
     }
 }

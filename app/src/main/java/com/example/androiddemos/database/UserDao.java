@@ -26,18 +26,38 @@ public interface UserDao {
 
     //新增加用户
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(UserInfo userInfo);
+    Long insertUser(UserInfo userInfo);
 
     /**
-     * 查询当前姓名的分数
+     * 查询当前用户的分数
      *
-     * @param name 当前名字
+     * @param id 当前名字
      * @return
      */
-    @Query("SELECT score FROM user_info WHERE name = :name")
-    long getScoreByUserName(String name);
+    @Query("SELECT score FROM user_info WHERE _id = :id")
+    long getScoreByUserId(Long id);
+
+    /**
+     * 查询某个id对应的用户信息
+     *
+     * @param id 当前用户id
+     * @return
+     */
+    @Query("SELECT * FROM user_info WHERE _id = :id")
+    UserInfo getOneUserById(Long id);
+
+    /**
+     * 删除某一个用户
+     *
+     * @return
+     */
+    @Query("DELETE FROM user_info WHERE _id == (:id)")
+    void deleteUser(Long id);
 
     //排序，按分数从大到小排序
     @Query("SELECT * FROM user_info ORDER BY score DESC")
     List<UserInfo> getAllUserInfoByDesc();
+
+    @Query("UPDATE user_info SET score =(:score) WHERE _id == (:id)")
+    void updateUserInfoById(Long id,Long score);
 }
