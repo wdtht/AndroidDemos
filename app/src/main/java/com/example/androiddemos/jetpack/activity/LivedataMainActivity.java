@@ -112,7 +112,7 @@ public class LivedataMainActivity extends BaseActivity {
                 selectColorIndex = random.nextInt(colorAll.length);
                 mainBinding.selectColor.setViewColor(Color.parseColor(colorAll[selectColorIndex]));
             }
-        }, 0, 1000);
+        }, 0, 500);
     }
 
 
