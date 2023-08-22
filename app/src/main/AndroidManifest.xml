@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AndroidDemos"
         tools:targetApi="31">
         <activity
+            android:name=".serialport.SerialportActivity"
+            android:exported="false" />
+        <activity
             android:name=".customview.activity.DragListActivity"
             android:exported="false" />
         <activity

@@ -13,6 +13,7 @@ import com.example.androiddemos.customview.activity.DragListActivity;
 import com.example.androiddemos.jetpack.activity.LivedataMainActivity;
 import com.example.androiddemos.main.adapter.SimpleRecycleViewAdapter;
 import com.example.androiddemos.network.activity.NetworkActivity;
+import com.example.androiddemos.serialport.SerialportActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +25,20 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
 
         SimpleRecycleViewAdapter recycleViewAdapter = new SimpleRecycleViewAdapter();
-        String[] adpterData={"custom","network","livedata","drag list"};
+        String[] adpterData = {"custom", "network", "livedata", "drag list", "serial port"};
         View.OnClickListener[] onClickListeners = {
                 v -> CustomViewActivity.start(this),
                 v -> NetworkActivity.start(this),
                 v -> LivedataMainActivity.start(this),
-                v -> DragListActivity.start(this)
+                v -> DragListActivity.start(this),
+                v -> SerialportActivity.start(this)
         };
         List<SimpleRecycleViewAdapter.ViewData> viewData = new ArrayList<>();
-        for (int i=0;i<adpterData.length;i++) {
-            viewData.add( new SimpleRecycleViewAdapter.ViewData(adpterData[i], onClickListeners[i]));
+        for (int i = 0; i < adpterData.length; i++) {
+            viewData.add(new SimpleRecycleViewAdapter.ViewData(adpterData[i], onClickListeners[i]));
         }
         recycleViewAdapter.setViewDataList(viewData);
         recyclerView.setAdapter(recycleViewAdapter);
