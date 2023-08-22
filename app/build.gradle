@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-
 }
 
 android {
@@ -56,6 +55,9 @@ android {
 }
 
 dependencies {
+    //butterknife @BindView绑定布局AndroidX使用
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation "androidx.room:room-runtime:2.5.2"
     implementation 'io.github.xmaihh:serialport:2.1.1'
