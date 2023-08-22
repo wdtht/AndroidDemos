@@ -95,7 +95,7 @@ public class LivedataMainActivity extends BaseActivity {
                 if (selectColorIndex == changeColorIndex) {
                     Toast.makeText(this, "恭喜挑战成功！！！", Toast.LENGTH_LONG).show();
                     userInfo.score++;
-                    mainBinding.nowPlayerScore.setText((int) userInfo.score);
+                    mainBinding.nowPlayerScore.setText(String.valueOf (userInfo.score));
                 } else {
                     Toast.makeText(this, "很抱歉挑战失败！！！", Toast.LENGTH_LONG).show();
                 }
@@ -112,7 +112,7 @@ public class LivedataMainActivity extends BaseActivity {
                 selectColorIndex = random.nextInt(colorAll.length);
                 mainBinding.selectColor.setViewColor(Color.parseColor(colorAll[selectColorIndex]));
             }
-        }, 0, 400);
+        }, 0, 1000);
     }
 
 
