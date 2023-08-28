@@ -3,6 +3,8 @@ package com.example.androiddemos;
 import android.app.Application;
 import android.util.Log;
 
+import com.example.androiddemos.util.threadpool.LogCallback;
+import com.example.androiddemos.util.threadpool.PoolThread;
 import com.tencent.mmkv.MMKV;
 
 /**
@@ -14,6 +16,7 @@ import com.tencent.mmkv.MMKV;
 public class DemoApplication extends Application {
     private static final String TAG = "superdemo/DemoApplication";
     private static DemoApplication instance;
+    private PoolThread executor;
     /**
      * 获取App实例
      *
@@ -21,6 +24,22 @@ public class DemoApplication extends Application {
      */
     public static DemoApplication getInstance() {
         return instance;
+    }
+
+    /**
+     * 获取线程池管理器对象，统一的管理器维护所有的线程池
+     *
+     * @return executor对象
+     */
+    public PoolThread getExecutor() {
+        if (executor == null) {
+            executor = PoolThread.ThreadBuilder
+                    .createFixed(8)
+                    .setPriority(Thread.MAX_PRIORITY)
+                    .setCallback(new LogCallback())
+                    .build();
+        }
+        return executor;
     }
 
     @Override

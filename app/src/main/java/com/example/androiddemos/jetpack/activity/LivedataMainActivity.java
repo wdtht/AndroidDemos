@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.androiddemos.BaseActivity;
+import com.example.androiddemos.DemoApplication;
 import com.example.androiddemos.R;
 import com.example.androiddemos.constants.ConstKey;
 import com.example.androiddemos.database.UserInfo;
@@ -137,12 +138,13 @@ public class LivedataMainActivity extends BaseActivity {
                 mainBinding.nowPlayerName.setText("当前玩家是：" + str);
                 userInfo.name = str;
                 userInfo.score = 0;
-                new Thread(() -> {
+                //用线程池存储
+                DemoApplication.getInstance().getExecutor().execute(() -> {
                     Long id = GameUserConfig.getInstance().setConfig(userInfo);
                     Log.d(TAG, "id:" + id);
                     //将当前玩家存储起来
                     MMKV.defaultMMKV().encode(ConstKey.CURRENT_USER_KEY, id);
-                }).start();
+                });
             }
         };
     }
