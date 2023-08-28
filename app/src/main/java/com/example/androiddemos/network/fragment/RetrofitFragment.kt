@@ -24,7 +24,7 @@ class RetrofitFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_retrofit, container, false)
-        val reposFlow = api<GitHubService>().listRepos("wdtht")
+        val reposFlow = api<GitHubService>().listRepos("octocat")
 
         lifecycleScope.launch(Dispatchers.IO){
             reposFlow.collect{
