@@ -47,10 +47,15 @@ public class LivedataMainActivity extends BaseActivity {
     private String[] colorAll;
     private Timer timer;
 
+    private static final int MIN_CLICK_DELAY_TIME= 1000;
+    private static long lastClickTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "#onCreate");
         initView();
+        initEvent();
     }
 
     private void initView() {
@@ -72,7 +77,6 @@ public class LivedataMainActivity extends BaseActivity {
             mainBinding.nowPlayerName.setText("当前玩家是：" + userInfo.name);
             mainBinding.nowPlayerScore.setText(String.valueOf(userInfo.score));
         }
-        initEvent();
 //        LivedataModel livedataModel = new LivedataModel();
 //        initViewModel();
     }
@@ -85,23 +89,35 @@ public class LivedataMainActivity extends BaseActivity {
             mainBinding.changeColor.setViewColor(Color.parseColor(colorAll[changeColorIndex]));
         });
         mainBinding.controlBtn.setOnClickListener(v -> {
-            Log.d(TAG, "controlBtn click: ");
-            isStop = !isStop;
-            if (isStop) {
-                mainBinding.controlBtn.setText("停止");
-                changeColor();
-            } else {
-                timer.cancel();
-                mainBinding.controlBtn.setText("开始");
-                if (selectColorIndex == changeColorIndex) {
-                    Toast.makeText(this, "恭喜挑战成功！！！", Toast.LENGTH_LONG).show();
-                    userInfo.score++;
-                    mainBinding.nowPlayerScore.setText(String.valueOf (userInfo.score));
-                } else {
-                    Toast.makeText(this, "很抱歉挑战失败！！！", Toast.LENGTH_LONG).show();
-                }
-            }
+            controlBtnClick();
         });
+    }
+
+    private void controlBtnClick() {
+        //防多次恶意点击
+        long curClickTime = System.currentTimeMillis();
+        if (Math.abs(curClickTime - lastClickTime) < MIN_CLICK_DELAY_TIME) {
+            Log.d(TAG, "controlBtn click too fast!");
+            lastClickTime = curClickTime;
+            return;
+        }
+        lastClickTime = curClickTime;
+        Log.d(TAG, "controlBtn click!");
+        isStop = !isStop;
+        if (isStop) {
+            mainBinding.controlBtn.setText("停止");
+            changeColor();
+        } else {
+            timer.cancel();
+            mainBinding.controlBtn.setText("开始");
+            if (selectColorIndex == changeColorIndex) {
+                Toast.makeText(this, "恭喜挑战成功！！！", Toast.LENGTH_LONG).show();
+                userInfo.score++;
+                mainBinding.nowPlayerScore.setText(String.valueOf (userInfo.score));
+            } else {
+                Toast.makeText(this, "很抱歉挑战失败！！！", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void changeColor() {

@@ -2,6 +2,7 @@ package com.example.androiddemos.jetpack.config;
 
 import android.util.Log;
 
+import com.example.androiddemos.DemoApplication;
 import com.example.androiddemos.constants.ConstKey;
 import com.example.androiddemos.database.UserInfo;
 import com.example.androiddemos.database.UserRepository;
@@ -56,14 +57,14 @@ public class GameUserConfig {
 
     public void readConfig() {
         Log.d(Tag, "#readConfig");
-        new Thread(() -> {
+        DemoApplication.getInstance().getExecutor().execute(() -> {
             this.allUser = UserRepository.Companion.getInstance().getAllUser();
             Long currentUserId = MMKV.defaultMMKV().decodeLong(ConstKey.CURRENT_USER_KEY);
             Log.d(Tag, "currentUser:" + currentUserId);
             if (currentUserId != 0L) {
                 this.user = UserRepository.Companion.getInstance().getOneUserById(currentUserId);
             }
-        }).start();
+        });
     }
 
     public UserInfo getUser() {

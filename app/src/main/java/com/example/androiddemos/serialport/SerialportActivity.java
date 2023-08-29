@@ -2,6 +2,7 @@ package com.example.androiddemos.serialport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +15,11 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.androiddemos.BaseActivity;
+import android.Manifest;
 import com.example.androiddemos.R;
 import com.google.gson.Gson;
 
@@ -70,7 +75,7 @@ public class SerialportActivity extends BaseActivity implements RadioGroup.OnChe
 
     private void initSerialConfig() {
         //初始化SerialHelper对象，设定串口名称和波特率（此处为接收扫码数据）
-        serialHelper = new SerialHelper("/dev/ttyS0", 9600) {
+        serialHelper = new SerialHelper("/dev/ttyS6", 9600) {
             @Override
             protected void onDataReceived(ComBean paramComBean) {
                 Message message = mHandler.obtainMessage();
