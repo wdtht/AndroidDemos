@@ -1,6 +1,7 @@
 package com.example.androiddemos.network.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,10 @@ import com.example.androiddemos.network.retrofit.GitHubService
 import com.example.androiddemos.network.retrofit.api
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class RetrofitFragment : Fragment() {
@@ -24,13 +29,21 @@ class RetrofitFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_retrofit, container, false)
-        val reposFlow = api<GitHubService>().listRepos("octocat")
 
-        lifecycleScope.launch(Dispatchers.IO){
-            reposFlow.collect{
-                requireActivity().runOnUiThread {
-                    binding.textView.text = it[0].toString()
-                }
+        binding.button.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.Main) {
+                api<GitHubService>().listRepos("octocat")
+                    .flowOn(Dispatchers.IO)
+                    .map { it[0].toString() }
+                    .flowOn(Dispatchers.Default)
+                    .catch {
+                        Log.e(
+                            TAG,
+                            "onCreateView: binding.button.setOnClickListener api<GitHubService>().listRepos error message",
+                            it
+                        )
+                    }
+                    .collect { binding.textView.text = it }
             }
         }
         return binding.root

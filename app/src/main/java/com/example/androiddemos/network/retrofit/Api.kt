@@ -11,6 +11,7 @@ import retrofit2.Callback
 import retrofit2.Converter
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.concurrent.ConcurrentHashMap
@@ -36,16 +37,21 @@ internal fun createApi(className: String, annotations: List<Annotation>): Retrof
     return retrofitInstances.getOrPut(className) {
         val builder = Retrofit.Builder()
 
+        var hasConvertFactory = false
+        var hasCallAdapterFactory = false
+
         annotations.forEach { annotation ->
             when (annotation) {
                 is BaseUrl -> builder.baseUrl(annotation.value)
                 is ConvertFactory -> {
+                    hasConvertFactory = true
                     val factory = cachedFactories.getOrPut(annotation.factoryKClass) {
                         annotation.factoryKClass.java.getMethod("create").invoke(null)
                     }
                     builder.addConverterFactory(factory as? Converter.Factory ?: throw IllegalArgumentException("Invalid Converter.Factory type"))
                 }
                 is CallAdapterFactory -> {
+                    hasCallAdapterFactory = true
                     val factory = cachedFactories.getOrPut(annotation.factoryKClass) {
                         annotation.factoryKClass.java.getMethod("create").invoke(null)
                     }
@@ -53,6 +59,16 @@ internal fun createApi(className: String, annotations: List<Annotation>): Retrof
                 }
                 else -> {}
             }
+        }
+
+        // 如果没有添加 ConvertFactory 注解，使用默认的 GsonConverterFactory
+        if (!hasConvertFactory) {
+            builder.addConverterFactory(GsonConverterFactory.create())
+        }
+
+        // 如果没有添加 CallAdapterFactory 注解，使用默认的 FlowCallAdapterFactory
+        if (!hasCallAdapterFactory) {
+            builder.addCallAdapterFactory(FlowCallAdapterFactory.create())
         }
 
         builder.build()
@@ -115,7 +131,6 @@ class FlowCallAdapterFactory private constructor() : CallAdapter.Factory() {
                     }
                 }
             }
-
             call.enqueue(callback)
             awaitClose { call.cancel() }
         }.catch { it.printStackTrace() }

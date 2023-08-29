@@ -5,8 +5,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-@CallAdapterFactory(factoryKClass = FlowCallAdapterFactory::class)
-@ConvertFactory(factoryKClass = GsonConverterFactory::class)
 @BaseUrl("https://api.github.com/")
 interface GitHubService {
     @GET("users/{user}/repos")
