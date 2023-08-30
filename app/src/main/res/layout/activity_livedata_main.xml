@@ -9,6 +9,14 @@
     <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/setup"
+            android:layout_marginTop="10dp"
+            android:layout_width="35dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/setup"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,9 +39,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="50dp">
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="75dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -53,13 +61,13 @@
 
         <com.example.androiddemos.view.RoundView
             android:id="@+id/change_color"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_alignParentTop="true"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
+            android:layout_alignBottom="@id/select_color"
+            android:layout_marginBottom="250dp"
             app:viewColor="#5E9ACD"
-            app:viewRadius="100dp" />
+            app:viewRadius="70dp" />
 
         <com.example.androiddemos.view.RoundView
             android:id="@+id/select_color"
