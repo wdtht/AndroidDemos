@@ -11,4 +11,5 @@
     <string name="retrofit_request">retrofit_request</string>
     <string name="_1_demo_get_post_okhttp3">说明：1.本demo包含get,post,以及okhttp3相关。</string>
     <string name="post">post</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
