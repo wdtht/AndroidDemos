@@ -6,7 +6,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
@@ -16,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.didi.drouter.api.DRouter
 import com.example.androiddemos.compose.ui.theme.AndroidDemosTheme
 import com.example.androiddemos.customview.activity.CustomViewActivity
@@ -52,13 +60,13 @@ class MainActivity : ComponentActivity() {
             "返回"
         )
         val onClickListeners = arrayOf(
-            {CustomViewActivity.start(this)},
-            {NetworkActivity.start(this)},
-            {LivedataMainActivity.start(this)},
-            {DragListActivity.start(this)},
-            {SerialportActivity.start(this)},
-            {DRouter.build("/super/cardView/activity/cardView").start(this)},
-            {finish()}
+            { CustomViewActivity.start(this) },
+            { NetworkActivity.start(this) },
+            { LivedataMainActivity.start(this) },
+            { DragListActivity.start(this) },
+            { SerialportActivity.start(this) },
+            { DRouter.build("/super/cardView/activity/cardView").start(this) },
+            { finish() }
         )
         val viewData: MutableList<ViewData> = ArrayList()
         for (i in adpterData.indices) {
@@ -67,12 +75,18 @@ class MainActivity : ComponentActivity() {
         return viewData
     }
 
+    @OptIn(ExperimentalLayoutApi::class)
     @Composable
     fun MainScreen() {
-        LazyVerticalGrid(columns = GridCells.Fixed(3)) {
-            items(itemDataList.size) { index ->
-                Button(onClick = itemDataList[index].onClickListener) {
-                    Text(text = itemDataList[index].text)
+        FlowRow(horizontalArrangement = Arrangement.SpaceBetween) {
+            for (i in itemDataList.indices) {
+                Button(
+                    onClick = itemDataList[i].onClickListener,
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .wrapContentSize()
+                ) {
+                    Text(text = itemDataList[i].text, modifier = Modifier.wrapContentSize())
                 }
             }
         }
@@ -98,10 +112,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
-
-
 
 
 data class ViewData(val text: String, val onClickListener: () -> Unit)
