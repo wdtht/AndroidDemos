@@ -3,6 +3,7 @@ package com.example.androiddemos;
 import android.app.Application;
 import android.util.Log;
 
+import com.didi.drouter.api.DRouter;
 import com.example.androiddemos.util.threadpool.LogCallback;
 import com.example.androiddemos.util.threadpool.PoolThread;
 import com.tencent.mmkv.MMKV;
@@ -48,6 +49,7 @@ public class DemoApplication extends Application {
         Log.d("TAG","#onCreate-----");
         //mmkv 存储键值对，初始化
         instance=this;
+        DRouter.init(this);
         MMKV.initialize(this);
     }
 }
