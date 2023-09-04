@@ -78,7 +78,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalLayoutApi::class)
     @Composable
     fun MainScreen() {
-        FlowRow(horizontalArrangement = Arrangement.SpaceBetween) {
+        FlowRow {
             for (i in itemDataList.indices) {
                 Button(
                     onClick = itemDataList[i].onClickListener,
