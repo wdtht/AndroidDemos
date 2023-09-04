@@ -91,6 +91,11 @@ public class LivedataMainActivity extends BaseActivity {
         mainBinding.controlBtn.setOnClickListener(v -> {
             controlBtnClick();
         });
+        mainBinding.controlBtn.setOnLongClickListener(v->{
+            Log.d(TAG, "controlBtn long click!");
+            //不可以长按作弊
+            return true;
+        });
     }
 
     private void controlBtnClick() {
