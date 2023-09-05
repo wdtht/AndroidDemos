@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
@@ -95,6 +96,9 @@ public class LivedataMainActivity extends BaseActivity {
             Log.d(TAG, "controlBtn long click!");
             //不可以长按作弊
             return true;
+        });
+        mainBinding.setup.setOnClickListener(v->{
+            mainBinding.drawerView.openDrawer(Gravity.RIGHT);
         });
     }
 

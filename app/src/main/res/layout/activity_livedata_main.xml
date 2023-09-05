@@ -5,90 +5,113 @@
     <data>
 
     </data>
-
-    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/setup"
-            android:layout_marginTop="10dp"
-            android:layout_width="35dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/setup"/>
+        android:layout_height="match_parent"
+        android:id="@+id/drawerView">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="小游戏"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/nowPlayerName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="50dp"
-            android:text="当前玩家："
-            android:textSize="16dp" />
+        <!--    侧滑菜单-->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="75dp">
-
-            <TextView
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:background="#A19C9C"
+            android:layout_gravity="right">
+<!--            关键 left左侧滑,right右侧滑-->
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分数："
-                android:textSize="16dp" />
-
-            <TextView
-                android:id="@+id/nowPlayerScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#E31118"
-                android:text="0"
-                android:textSize="18dp" />
-
+                android:background="@drawable/btn_shape"
+                android:text="调节难度"/>
         </LinearLayout>
 
-        <com.example.androiddemos.view.RoundView
-            android:id="@+id/change_color"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignBottom="@id/select_color"
-            android:layout_marginBottom="250dp"
-            app:viewColor="#5E9ACD"
-            app:viewRadius="70dp" />
 
-        <com.example.androiddemos.view.RoundView
-            android:id="@+id/select_color"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="130dp"
-            app:viewColor="#BF2BC5"
-            app:viewRadius="100dp" />
+        <!--    主页面-->
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/setup"
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/setup" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="小游戏"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/nowPlayerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
+                android:text="当前玩家："
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="75dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分数："
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/nowPlayerScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#E31118"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <com.example.androiddemos.view.RoundView
+                android:id="@+id/change_color"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_alignBottom="@id/select_color"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="250dp"
+                app:viewColor="#5E9ACD"
+                app:viewRadius="70dp" />
+
+            <com.example.androiddemos.view.RoundView
+                android:id="@+id/select_color"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="130dp"
+                app:viewColor="#BF2BC5"
+                app:viewRadius="100dp" />
 
 
-        <Button
-            android:id="@+id/control_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="49dp"
-            android:background="@drawable/btn_shape"
-            android:text="开始" />
+            <Button
+                android:id="@+id/control_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="49dp"
+                android:background="@drawable/btn_shape"
+                android:text="开始" />
 
-    </RelativeLayout>
+        </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
