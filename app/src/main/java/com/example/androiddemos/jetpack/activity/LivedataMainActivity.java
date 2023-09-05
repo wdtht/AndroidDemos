@@ -17,11 +17,13 @@ import com.example.androiddemos.constants.ConstKey;
 import com.example.androiddemos.database.UserInfo;
 import com.example.androiddemos.databinding.ActivityLivedataMainBinding;
 import com.example.androiddemos.jetpack.config.GameUserConfig;
+import com.example.androiddemos.jetpack.enums.GameDifficultyEnum;
 import com.example.androiddemos.jetpack.viewmodel.LivedataViewModel;
 import com.example.androiddemos.view.EditPop;
 import com.example.androiddemos.view.OnLeftOrRightButtonClick;
 import com.tencent.mmkv.MMKV;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -78,6 +80,13 @@ public class LivedataMainActivity extends BaseActivity {
             mainBinding.nowPlayerName.setText("当前玩家是：" + userInfo.name);
             mainBinding.nowPlayerScore.setText(String.valueOf(userInfo.score));
         }
+
+        //设置游戏难度下拉选项
+        ArrayList<String> list = new ArrayList<>();
+        for (GameDifficultyEnum i:GameDifficultyEnum.values()) {
+            list.add(getString(i.getString()));
+        }
+        mainBinding.gameDificultControl.setItemsData(list);
 //        LivedataModel livedataModel = new LivedataModel();
 //        initViewModel();
     }
@@ -99,6 +108,9 @@ public class LivedataMainActivity extends BaseActivity {
         });
         mainBinding.setup.setOnClickListener(v->{
             mainBinding.drawerView.openDrawer(Gravity.RIGHT);
+        });
+        mainBinding.gameDificultControl.setListener((position,string)->{
+            Log.d(TAG, "position:" + position + " string:" + string);
         });
     }
 

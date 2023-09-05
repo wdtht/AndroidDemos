@@ -12,21 +12,37 @@
         android:id="@+id/drawerView">
 
         <!--    侧滑菜单-->
-        <LinearLayout
-            android:layout_width="250dp"
+        <androidx.percentlayout.widget.PercentFrameLayout
+            android:layout_width="270dp"
             android:layout_height="match_parent"
             android:background="#A19C9C"
             android:layout_gravity="right">
 <!--            关键 left左侧滑,right右侧滑-->
+
+<!--            app:layout_heightPercent：用百分比表示高度-->
+<!--            app:layout_widthPercent：用百分比表示宽度-->
+<!--            app:layout_marginPercent：用百分比表示View之间的间隔-->
+<!--            app:layout_marginLeftPercent：用百分比表示左边间隔-->
+<!--            app:layout_marginRight：用百分比表示右边间隔-->
+<!--            app:layout_marginTopPercent：用百分比表示顶部间隔-->
+<!--            app:layout_marginBottomPercent：用百分比表示底部间隔-->
+<!--            app:layout_marginStartPercent：用百分比表示距离第一个View之间的距离-->
+<!--            app:layout_marginEndPercent：用百分比表示距离最后一个View之间的距离-->
+<!--            app:layout_aspectRatio：用百分比表示View的宽高比 -->
             <com.example.androiddemos.view.CommonDropText
-                android:id="@+id/manual_stop"
-                android:layout_width="0dp"
+
+                android:id="@+id/game_dificult_control"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                app:layout_widthPercent="90%"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                app:layout_heightPercent="6%"
                 app:leftString="游戏难度调节"
                 app:showDivideLine="false"
                 app:text_size="18sp" />
-        </LinearLayout>
+        </androidx.percentlayout.widget.PercentFrameLayout>
 
 
         <!--    主页面-->

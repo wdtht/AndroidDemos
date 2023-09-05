@@ -12,4 +12,7 @@
     <string name="_1_demo_get_post_okhttp3">说明：1.本demo包含get,post,以及okhttp3相关。</string>
     <string name="post">post</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="game_hard">困难</string>
+    <string name="game_easy">简单</string>
+    <string name="game_medium">中等</string>
 </resources>

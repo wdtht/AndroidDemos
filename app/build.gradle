@@ -56,6 +56,7 @@ android {
 }
 
 dependencies {
+    implementation "androidx.percentlayout:percentlayout:1.0.0"
     implementation 'androidx.drawerlayout:drawerlayout:1.0.0'
     //butterknife @BindView绑定布局AndroidX使用
     implementation 'com.jakewharton:butterknife:10.2.1'
