@@ -13,8 +13,9 @@
 
         <!--    侧滑菜单-->
         <androidx.percentlayout.widget.PercentFrameLayout
-            android:layout_width="270dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_widthPercent="75%"
             android:background="#A19C9C"
             android:layout_gravity="right">
 <!--            关键 left左侧滑,right右侧滑-->
@@ -34,14 +35,13 @@
                 android:id="@+id/game_dificult_control"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="90%"
+               android:layout_marginEnd="20dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="10dp"
-                app:layout_heightPercent="6%"
+                android:layout_marginTop="35dp"
+                android:layout_marginStart="20dp"
+                app:layout_heightPercent="7%"
                 app:leftString="游戏难度调节"
-                app:showDivideLine="false"
-                app:text_size="18sp" />
+                app:showDivideLine="false" />
         </androidx.percentlayout.widget.PercentFrameLayout>
 
 
