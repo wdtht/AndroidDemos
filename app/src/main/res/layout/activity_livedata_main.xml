@@ -8,6 +8,7 @@
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/drawerView">
 
         <!--    侧滑菜单-->
@@ -17,11 +18,14 @@
             android:background="#A19C9C"
             android:layout_gravity="right">
 <!--            关键 left左侧滑,right右侧滑-->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_shape"
-                android:text="调节难度"/>
+            <com.example.androiddemos.view.CommonDropText
+                android:id="@+id/manual_stop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:leftString="游戏难度调节"
+                app:showDivideLine="false"
+                app:text_size="18sp" />
         </LinearLayout>
 
 

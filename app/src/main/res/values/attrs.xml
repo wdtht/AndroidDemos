@@ -21,4 +21,15 @@
         <attr name="viewRadius" format="dimension"/>
         <attr name="viewColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="DropView">
+        <!--        左边文字-->
+        <attr name="leftString" format="reference|string" />
+        <!--        右边列表内容-->
+        <attr name="rightListString" format="reference" />
+        <!--        是否显示底部分割线-->
+        <attr name="showDivideLine" format="boolean" />
+        <!--        文字大小-->
+        <attr name="text_size" format="dimension" />
+    </declare-styleable>
 </resources>
