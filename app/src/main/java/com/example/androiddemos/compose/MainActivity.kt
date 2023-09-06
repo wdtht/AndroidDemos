@@ -3,19 +3,13 @@ package com.example.androiddemos.compose
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -26,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.didi.drouter.api.DRouter
 import com.example.androiddemos.compose.ui.theme.AndroidDemosTheme
-import com.example.androiddemos.customview.activity.CustomViewActivity
 import com.example.androiddemos.customview.activity.DragListActivity
 import com.example.androiddemos.jetpack.activity.LivedataMainActivity
 import com.example.androiddemos.network.activity.NetworkActivity
@@ -50,7 +43,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun initData(): List<ViewData> {
-        val adpterData = arrayOf(
+        val adapterData = arrayOf(
             "custom",
             "network",
             "livedata",
@@ -69,8 +62,8 @@ class MainActivity : ComponentActivity() {
             { finish() }
         )
         val viewData: MutableList<ViewData> = ArrayList()
-        for (i in adpterData.indices) {
-            viewData.add(ViewData(adpterData[i], onClickListeners[i]))
+        for (i in adapterData.indices) {
+            viewData.add(ViewData(adapterData[i], onClickListeners[i]))
         }
         return viewData
     }

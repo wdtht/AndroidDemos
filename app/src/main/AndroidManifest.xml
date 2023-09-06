@@ -17,6 +17,11 @@
         android:theme="@style/Theme.AndroidDemos"
         tools:targetApi="31">
         <activity
+            android:name=".compose.CustomViewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_custom_view"
+            android:theme="@style/Theme.AndroidDemos" />
+        <activity
             android:name=".compose.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
