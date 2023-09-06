@@ -30,6 +30,15 @@
 <!--            app:layout_marginStartPercent：用百分比表示距离第一个View之间的距离-->
 <!--            app:layout_marginEndPercent：用百分比表示距离最后一个View之间的距离-->
 <!--            app:layout_aspectRatio：用百分比表示View的宽高比 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设置"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_marginLeftPercent="40%"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"/>
             <com.example.androiddemos.view.CommonDropText
 
                 android:id="@+id/game_dificult_control"
@@ -37,7 +46,7 @@
                 android:layout_height="match_parent"
                android:layout_marginEnd="20dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginStart="20dp"
                 app:layout_heightPercent="7%"
                 app:leftString="游戏难度调节"
