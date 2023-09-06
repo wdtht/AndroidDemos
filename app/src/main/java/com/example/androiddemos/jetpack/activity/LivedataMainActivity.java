@@ -49,6 +49,7 @@ public class LivedataMainActivity extends BaseActivity {
     private Boolean isStop = false;
     private String[] colorAll;
     private Timer timer;
+    private int changeTime = 500;
 
     private static final int MIN_CLICK_DELAY_TIME= 1000;
     private static long lastClickTime;
@@ -87,6 +88,9 @@ public class LivedataMainActivity extends BaseActivity {
             list.add(getString(i.getString()));
         }
         mainBinding.gameDificultControl.setItemsData(list);
+        int position = MMKV.defaultMMKV().decodeInt(ConstKey.DIFFICULTY_SELECT_KEY);
+        mainBinding.gameDificultControl.setSelection(position);
+        changeTime = GameDifficultyEnum.Companion.findTimeByPosition(position);
 //        LivedataModel livedataModel = new LivedataModel();
 //        initViewModel();
     }
@@ -111,6 +115,8 @@ public class LivedataMainActivity extends BaseActivity {
         });
         mainBinding.gameDificultControl.setListener((position,string)->{
             Log.d(TAG, "position:" + position + " string:" + string);
+            MMKV.defaultMMKV().encode(ConstKey.DIFFICULTY_SELECT_KEY, position);
+            changeTime = GameDifficultyEnum.Companion.findTimeByPosition(position);
         });
     }
 
@@ -150,7 +156,7 @@ public class LivedataMainActivity extends BaseActivity {
                 selectColorIndex = random.nextInt(colorAll.length);
                 mainBinding.selectColor.setViewColor(Color.parseColor(colorAll[selectColorIndex]));
             }
-        }, 0, 500);
+        }, 0, changeTime);
     }
 
 

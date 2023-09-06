@@ -11,6 +11,10 @@ public class ConstKey {
      * 游戏上面的圆，被选中的颜色
      */
     public static final String SELECT_COLOR_KEY = "select_color";
+    /**
+     * 游戏设置，难度设置
+     */
+    public static final String DIFFICULTY_SELECT_KEY = "difficulty_select";
 
     /**
      * 游戏下面的圆，一直在变的颜色，存按停止时的颜色
