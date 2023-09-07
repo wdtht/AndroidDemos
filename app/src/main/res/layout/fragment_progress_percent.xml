@@ -8,8 +8,7 @@ android:background="@android:color/white"
 android:paddingLeft="10pt"
 android:paddingTop="2pt"
 android:paddingRight="10pt"
-android:paddingBottom="2pt"
-tools:context=".main.activity.MainActivity">
+android:paddingBottom="2pt">
 
 <com.example.androiddemos.view.Progress
     android:id="@+id/bar"
@@ -45,5 +44,27 @@ tools:context=".main.activity.MainActivity">
         app:roundTextColor="#000000"
         app:textSize="20sp"
         app:isTextDisplay="true"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="250dp"
+        android:hint="请输入密码"
+        android:password="true"
+        android:singleLine="true"
+        android:textColorHint="#484747"
+        tools:ignore="Deprecated" />
+
+    <Button
+        android:id="@+id/btn_password_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/btn_shape"
+        android:text="pw_dialog" />
 
 </RelativeLayout>
