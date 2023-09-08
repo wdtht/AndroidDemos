@@ -16,4 +16,5 @@
     <string name="game_hard">困难</string>
     <string name="game_easy">简单</string>
     <string name="game_medium">中等</string>
+    <string name="title_activity_chat">chatActivity</string>
 </resources>
