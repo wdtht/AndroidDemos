@@ -42,7 +42,8 @@ import com.example.androiddemos.compose.CustomViewActivity
 import com.example.androiddemos.compose.chatdemo.ui.theme.AndroidDemosTheme
 
 val messages:List<Message> = listOf(Message("kexi","hhhhhhhhh")
-    ,Message("xianfa","bububububu")
+    ,Message("馅包","bububububu希包，我有一个不请之情。。。。。。。。。。。。。。。。。。。" +
+            "。。。。。。。。。我承认我是大傻帽")
     ,Message("taylor","1989forever"))
 class chatActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
