@@ -24,6 +24,7 @@ import com.example.androiddemos.customview.activity.DragListActivity
 import com.example.androiddemos.jetpack.activity.LivedataMainActivity
 import com.example.androiddemos.network.activity.NetworkActivity
 import com.example.androiddemos.serialport.SerialportActivity
+import com.example.androiddemos.compose.chatdemo.chatActivity
 
 class MainActivity : ComponentActivity() {
     private val itemDataList = initData()
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
             "drag list",
             "serial port",
             "card-view",
+            "chat",
             "返回"
         )
         val onClickListeners = arrayOf(
@@ -59,6 +61,7 @@ class MainActivity : ComponentActivity() {
             { DragListActivity.start(this) },
             { SerialportActivity.start(this) },
             { DRouter.build("/super/cardView/activity/cardView").start(this) },
+            {chatActivity.start(this)},
             { finish() }
         )
         val viewData: MutableList<ViewData> = ArrayList()

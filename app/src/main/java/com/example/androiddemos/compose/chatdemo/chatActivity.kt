@@ -1,5 +1,7 @@
 package com.example.androiddemos.compose.chatdemo
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -35,6 +37,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.core.content.ContextCompat
+import com.example.androiddemos.compose.CustomViewActivity
 import com.example.androiddemos.compose.chatdemo.ui.theme.AndroidDemosTheme
 
 val messages:List<Message> = listOf(Message("kexi","hhhhhhhhh")
@@ -51,6 +55,12 @@ class chatActivity : ComponentActivity() {
             }
         }
     }
+    companion object {
+        fun start(context: Context) {
+            val intent = Intent(context, chatActivity::class.java)
+            ContextCompat.startActivity(context, intent, null)
+        }
+    }
 }
 data class Message(val author: String, val body: String)
 
@@ -59,7 +69,7 @@ fun MessageCard(msg: Message) {
     Row(modifier = Modifier.padding(all = 8.dp)){
         //image需要传图片资源和描述
         Image(
-            painter=painterResource(R.drawable.head),
+            painter=painterResource(R.drawable.ic_head),
             contentDescription = null,
             modifier = Modifier
                 .size(40.dp)
