@@ -8,4 +8,46 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
+    <!--    94%透明度-->
+    <color name="color_bg_black6">#0F000000</color>
+
+    <!--    //品牌色-->
+    <color name="color_brand">#F38B3C</color>
+    <!--    作业地图底色-->
+    <color name="color_job_map_base">#D2DFF1</color>
+    <!--    模块面板底色-->
+    <color name="color_module_panel_background">#FFFFFF</color>
+    <!--    侧抽底色-->
+    <color name="color_side_draw_the_base">#E4EFFF</color>
+    <!--    所有二级三级底色-->
+    <color name="color_all_two_and_three_base">#DBE5F1</color>
+    <!--    选中色-->
+    <color name="color_selected">#FFF2E9</color>
+    <!--    配图区域色-->
+    <color name="hc_image_bg_color">#F7FAFF</color>
+    <!--    分割线-->
+    <color name="color_parting_line">#D8D8D8</color>
+    <!--    成功-->
+    <color name="color_success">#60D48F</color>
+    <!--异常-->
+    <color name="color_abnormal">#FFBC47</color>
+    <!--    失败-->
+    <color name="color_fail">#EA5659</color>
+    <!--    一级字-->
+    <color name="color_first_level_word">#333333</color>
+    <!--    二级字-->
+    <color name="color_second_level_word">#666666</color>
+    <!--    三级字-->
+    <color name="color_three_level_word">#999999</color>
+    <!--    偏色字-->
+    <color name="color_offset_word">#3A5377</color>
+
+    <color name="color_border_unselected">#C6D6EB</color>
+    <color name="color_implement_text_selected">#E6751F</color>
+    <color name="color_implement_bg_unselected">#E8ECF4</color>
+    <color name="color_implement_bg_selected">#FFE1CC</color>
+    <!--    50%透明度-->
+    <color name="color_brand_50">#80F38B3C</color>
+    <!--    二级页面标题栏底色-->
+    <color name="color_second_title_background">#E3F0FF</color>
 </resources>

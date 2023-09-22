@@ -19,6 +19,7 @@ import com.example.androiddemos.R;
 import com.example.androiddemos.network.fragment.OkgoFragment;
 import com.example.androiddemos.network.fragment.OkhttpFragment;
 import com.example.androiddemos.network.fragment.RetrofitFragment;
+import com.example.androiddemos.network.fragment.SwitchNavLineFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class NetworkActivity extends BaseActivity {
         viewPagerDataList.add(new ViewPagerData(R.drawable.finish, R.string.network_menu_action_okgo, OkgoFragment.class));
         viewPagerDataList.add(new ViewPagerData(R.drawable.finish, R.string.network_menu_action_retrofit, RetrofitFragment.class));
         viewPagerDataList.add(new ViewPagerData(R.drawable.finish, R.string.network_menu_action_okhttp, OkhttpFragment.class));
+        viewPagerDataList.add(new ViewPagerData(R.drawable.finish, R.string.line_move, SwitchNavLineFragment.class));
         bindViewPagerAndBottomNavigationView(viewPager, bottomNavigationView);
         fillDataIntoViewPagerAndBottomNavigationView(viewPager, bottomNavigationView,viewPagerDataList);
     }

@@ -24,6 +24,8 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
     }
 
     buildTypes {
@@ -52,6 +54,9 @@ android {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
+    }
+    viewBinding {
+        enabled = true
     }
 }
 

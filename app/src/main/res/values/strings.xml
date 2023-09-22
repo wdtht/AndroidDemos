@@ -8,6 +8,7 @@
     <string name="network_menu_action_okhttp">okhttp</string>
     <string name="network_menu_action_retrofit">retrofit</string>
     <string name="network_menu_action_okgo">okgo</string>
+    <string name="line_move">Line move</string>
     <string name="retrofit_request">retrofit_request</string>
     <string name="_1_demo_get_post_okhttp3">说明：1.本demo包含get,post,以及okhttp3相关。</string>
     <string name="post">post</string>
