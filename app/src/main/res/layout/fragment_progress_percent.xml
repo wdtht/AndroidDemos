@@ -14,7 +14,7 @@ android:paddingBottom="2pt">
     android:id="@+id/bar"
     android:layout_width="match_parent"
     android:layout_height="24dp"
-    android:layout_marginTop="100dp"
+    android:layout_marginTop="30dp"
     app:backColor="@color/black"
     app:barColor="#234567"
     app:textColor="@color/white"
@@ -24,8 +24,7 @@ android:paddingBottom="2pt">
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/btn_shape"
         android:text="@string/reset" />
 
@@ -33,7 +32,7 @@ android:paddingBottom="2pt">
         android:id="@+id/id_round_progressbar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="80dp"
         android:layout_centerHorizontal="true"
         app:radius="40dp"
         app:ringWidth="10dp"
@@ -48,9 +47,8 @@ android:paddingBottom="2pt">
     <EditText
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="250dp"
+        android:layout_marginTop="150dp"
         android:hint="请输入密码"
         android:password="true"
         android:singleLine="true"
@@ -61,10 +59,18 @@ android:paddingBottom="2pt">
         android:id="@+id/btn_password_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="150dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/btn_shape"
         android:text="pw_dialog" />
+
+    <Button
+        android:id="@+id/btn_picker_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/btn_shape"
+        android:text="picker dialog" />
 
 </RelativeLayout>

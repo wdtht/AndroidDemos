@@ -12,10 +12,22 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.androiddemos.R;
-import com.example.androiddemos.view.Progress;
+import com.example.androiddemos.customview.GoodsCategoryBean;
 import com.example.androiddemos.view.PasswordEditDialog;
+import com.example.androiddemos.view.PickerDialog;
+import com.example.androiddemos.view.Progress;
 import com.example.androiddemos.view.RoundProgressBar;
+import com.github.gzuliyujiang.dialog.BaseDialog;
+import com.github.gzuliyujiang.dialog.DialogColor;
+import com.github.gzuliyujiang.dialog.DialogConfig;
+import com.github.gzuliyujiang.dialog.DialogStyle;
+import com.github.gzuliyujiang.wheelpicker.OptionPicker;
+import com.github.gzuliyujiang.wheelpicker.contract.OnOptionPickedListener;
+import com.github.gzuliyujiang.wheelpicker.contract.OnOptionSelectedListener;
+import com.github.gzuliyujiang.wheelpicker.widget.OptionWheelLayout;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -69,7 +81,17 @@ public class ProgressPercentFragment extends Fragment {
               });
               dialog.show();
         });
+        view.findViewById(R.id.btn_picker_dialog).setOnClickListener(v->{
+            onDialogStyle(v);
+        });
         return view;
+    }
+    @SuppressLint("Range")
+    public void onDialogStyle(View view) {
+        OptionPicker picker = new PickerDialog(getActivity());
+        picker.setData("默认-屏幕底部弹窗", "样式1-屏幕底部弹窗", "样式2-屏幕底部弹窗", "样式3-屏幕中间弹窗");
+        DialogConfig.setDialogStyle(DialogStyle.Default);
+        picker.show();
     }
     private void reset() {
         progress = 0;
