@@ -76,15 +76,36 @@ public class NavLineRecycleViewManage {
                 int fromPosition = viewHolder.getAdapterPosition();
                 int toPosition = target.getAdapterPosition();
                 navLineRecyleAdapter.onItemMove(fromPosition, toPosition);
-
-                // 更新selectedPos
-                navLineRecyleAdapter.updateSelectedPosAfterMove(fromPosition, toPosition);
                 return true;
             }
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 // 不需要处理侧滑删除
+            }
+
+            @Override
+            public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
+                super.onSelectedChanged(viewHolder, actionState);
+                if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+                    startDragPosition = viewHolder.getAdapterPosition();//设置开始位置
+                    navLineRecyleAdapter.setStartDragPosition(startDragPosition);
+                }
+            }
+
+            // 添加这个方法，去除高亮
+            @Override
+            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+                super.clearView(recyclerView, viewHolder);
+                endDragPosition = viewHolder.getAdapterPosition();//记录结束拖动的位置
+                if (mOrderListListener != null && endDragPosition != -1 && startDragPosition != -1) {
+                    // 这里提供开始位置和结束位置的结果
+                    mOrderListListener.orderList(startDragPosition, endDragPosition);
+                    // 重置位置信息
+                    endDragPosition = -1;
+                    startDragPosition = -1;
+                    navLineRecyleAdapter.setStartDragPosition(-1);
+                }
             }
         };
 

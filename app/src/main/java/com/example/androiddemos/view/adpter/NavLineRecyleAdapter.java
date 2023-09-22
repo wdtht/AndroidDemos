@@ -31,6 +31,11 @@ public class NavLineRecyleAdapter extends RecyclerView.Adapter<NavLineRecyclerHo
 
     private OnItemClickListener onItemClickListener;
     private int selectedPos = RecyclerView.NO_POSITION; // 初始化选中位置
+    private int startDragPosition = -1;
+
+    public void setStartDragPosition(int position) {
+        startDragPosition = position;
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -67,7 +72,7 @@ public class NavLineRecyleAdapter extends RecyclerView.Adapter<NavLineRecyclerHo
         });
         setSelectView(position, holder);
         holder.itemView.setOnClickListener(v -> {
-            Log.d(TAG,"itemView click!");
+            Log.d(TAG, "itemView click!");
             notifyItemChanged(selectedPos); // 刷新之前的选中项
             selectedPos = holder.getAdapterPosition(); // 更新选中项
             notifyItemChanged(selectedPos); // 刷新当前选中项
@@ -90,19 +95,16 @@ public class NavLineRecyleAdapter extends RecyclerView.Adapter<NavLineRecyclerHo
     }
 
     public void onItemMove(int fromPosition, int toPosition) {
+        Log.d(TAG, "selectedPos:" + selectedPos);
         Collections.swap(itemList, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
-
-        // 更新选中状态
-        updateSelectedPosAfterMove(fromPosition, toPosition);
-    }
-
-    public void updateSelectedPosAfterMove(int fromPosition, int toPosition) {
-        if (selectedPos == fromPosition) {
-            selectedPos = toPosition;
-        } else if (selectedPos == toPosition) {
+        //修改item选中状态
+        notifyItemChanged(selectedPos);//修改之前的状态
+        if(fromPosition == startDragPosition){//改变选中的状态
             selectedPos = fromPosition;
+        }else{
+            selectedPos = toPosition;
         }
+        notifyItemMoved(fromPosition, toPosition);
         notifyItemChanged(fromPosition);
         notifyItemChanged(toPosition);
     }
