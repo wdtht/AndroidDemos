@@ -89,25 +89,12 @@ public class NavLineRecyleAdapter extends RecyclerView.Adapter<NavLineRecyclerHo
         }
     }
 
-    // 更新选中状态
-    public void setSelectedPos(int pos) {
-        notifyItemChanged(selectedPos);
-        selectedPos = pos;
-        notifyItemChanged(selectedPos);
-    }
-
-    // 清除选中状态
-    public void clearSelectedPos() {
-        notifyItemChanged(selectedPos);
-        selectedPos = RecyclerView.NO_POSITION;
-    }
-
     public void onItemMove(int fromPosition, int toPosition) {
         Collections.swap(itemList, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
 
         // 更新选中状态
-        //updateSelectedPosAfterMove(fromPosition, toPosition);
+        updateSelectedPosAfterMove(fromPosition, toPosition);
     }
 
     public void updateSelectedPosAfterMove(int fromPosition, int toPosition) {

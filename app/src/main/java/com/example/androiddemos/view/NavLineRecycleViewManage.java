@@ -65,6 +65,7 @@ public class NavLineRecycleViewManage {
 
 
     public void initTouchMove() {
+        //初始拖拽功能，需要就注册
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
 
@@ -75,44 +76,21 @@ public class NavLineRecycleViewManage {
                 int fromPosition = viewHolder.getAdapterPosition();
                 int toPosition = target.getAdapterPosition();
                 navLineRecyleAdapter.onItemMove(fromPosition, toPosition);
+
+                // 更新selectedPos
+                navLineRecyleAdapter.updateSelectedPosAfterMove(fromPosition, toPosition);
                 return true;
             }
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-            }
-
-            // 添加这个方法，使得高亮能跟随手势
-            @Override
-            public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
-                super.onSelectedChanged(viewHolder, actionState);
-                if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
-                    startDragPosition = viewHolder.getAdapterPosition();
-                    navLineRecyleAdapter.setSelectedPos(startDragPosition);
-                }
-            }
-
-            // 添加这个方法，去除高亮
-            @Override
-            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                super.clearView(recyclerView, viewHolder);
-                endDragPosition = viewHolder.getAdapterPosition(); // 记录结束拖动的位置
-                //navLineRecyleAdapter.clearSelectedPos();
-                if (mOrderListListener != null) {
-                    // 这里提供开始位置和结束位置的结果
-                    Log.d(TAG,"startDragPosition:"+startDragPosition+" endDragPosition:"+endDragPosition);
-                    mOrderListListener.orderList(startDragPosition,endDragPosition);
-                    startDragPosition = -1;
-                    endDragPosition = -1; // 重置位置信息
-                }
+                // 不需要处理侧滑删除
             }
         };
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
-
 
 
     public void orderListListener(orderListListener orderListListener) {
