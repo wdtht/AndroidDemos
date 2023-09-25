@@ -44,6 +44,14 @@ public class NetworkTabActivity extends BaseActivity {
         new TabLayoutMediator(mainBinding.tabLayout, mainBinding.viewPager, (tab, position) -> {
             tab.setCustomView(adapter.getTabView(position));
         }).attach();
+
+        //跳转到指定页面
+//        binding.viewPager.setCurrentItem(pageIndex,  false)
+        //初始修改选中的item文字图片颜色
+//        binding.tabLayout.getTabAt(pageIndex)?.customView?.findViewById<ImageView>(R.id.tab_icon)
+//                ?.setColorFilter(getColor(R.color.color_brand))
+//        binding.tabLayout.getTabAt(pageIndex)?.customView?.findViewById<TextView>(R.id.tab_text)
+//                ?.setTextColor(getColor(R.color.color_brand))
     }
 
     private void initEvent() {
@@ -52,7 +60,6 @@ public class NetworkTabActivity extends BaseActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 View view = tab.getCustomView();
                 if (view != null) {
-                    view.setBackgroundResource(R.drawable.selector_panel_selection_effect);  // 替换成选中背景
                     ImageView tabImageView = view.findViewById(R.id.tab_icon);
                     TextView tabTextView = view.findViewById(R.id.tab_text);
                     tabImageView.setColorFilter(getColor(R.color.color_offset_word));  // 替换成选中颜色
@@ -64,7 +71,6 @@ public class NetworkTabActivity extends BaseActivity {
             public void onTabUnselected(TabLayout.Tab tab) {
                 View view = tab.getCustomView();
                 if (view != null) {
-                    view.setBackgroundResource(R.drawable.rounded_corner_background_item);  // 替换成未选中背景
                     ImageView tabImageView = view.findViewById(R.id.tab_icon);
                     TextView tabTextView = view.findViewById(R.id.tab_text);
                     tabImageView.setColorFilter(getColor(R.color.color_brand_50));  // 替换成未选中颜色
