@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -64,49 +65,63 @@ public class NavLineRecyleAdapter extends RecyclerView.Adapter<NavLineRecyclerHo
         setIcon(position, holder);
         holder.tvTitle.setText(item.title);
         holder.tvContent.setText(item.content);
+        setSelectView(position, holder);
         holder.tvUsing.setOnClickListener(view -> {
             //using点击事件
             if (view.getVisibility() == View.VISIBLE) {
                 onUsingClickListener.onUsingClick(position);
             }
         });
-        setSelectView(position, holder);
-        holder.itemView.setOnClickListener(v -> {
+        // 这里其实有一些问题,不应该每次重新设置监听器,但也不造成问题
+        holder.itemView.setOnTouchListener((view,event) -> {
             Log.d(TAG, "itemView click!");
-            notifyItemChanged(selectedPos); // 刷新之前的选中项
-            selectedPos = holder.getAdapterPosition(); // 更新选中项
-            notifyItemChanged(selectedPos); // 刷新当前选中项
-            //回调出去的位置信息
-            if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(position);
+            if(event.getAction() == MotionEvent.ACTION_DOWN){
+                selectedPos = holder.getAdapterPosition(); // 更新选中项
+                for(int i = 0; i < itemList.size(); i++){
+                    if(i != selectedPos){
+                        if(itemList.get(i).isSelected == true){
+                            itemList.get(i).isSelected = false;
+                            notifyItemChanged(i);
+                        }
+                    }else {
+                        if(itemList.get(i).isSelected == false){
+                            itemList.get(i).isSelected = true;
+                            notifyItemChanged(i);
+                        }
+                    }
+                }
+                //回调出去的位置信息
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(position);
+                }
             }
+            return false;
         });
     }
 
     //设置选中颜色和using的显示
     private void setSelectView(int position, NavLineRecyclerHolder holder) {
-        if (selectedPos == position) {
+
+        if(itemList.get(position).isSelected){
             holder.tvUsing.setVisibility(View.VISIBLE);
             holder.itemView.setSelected(true);
-        } else {
+        }else {
             holder.tvUsing.setVisibility(View.INVISIBLE);
             holder.itemView.setSelected(false);
         }
+//        if (selectedPos == position) {
+//            holder.tvUsing.setVisibility(View.VISIBLE);
+//            holder.itemView.setSelected(true);
+//        } else {
+//            holder.tvUsing.setVisibility(View.INVISIBLE);
+//            holder.itemView.setSelected(false);
+//        }
     }
 
     public void onItemMove(int fromPosition, int toPosition) {
         Log.d(TAG, "selectedPos:" + selectedPos);
         Collections.swap(itemList, fromPosition, toPosition);
-        //修改item选中状态
-        notifyItemChanged(selectedPos);//修改之前的状态
-        if(fromPosition == startDragPosition){//改变选中的状态
-            selectedPos = fromPosition;
-        }else{
-            selectedPos = toPosition;
-        }
         notifyItemMoved(fromPosition, toPosition);
-        notifyItemChanged(fromPosition);
-        notifyItemChanged(toPosition);
     }
 
     public void setList(List<ItemData> list) {

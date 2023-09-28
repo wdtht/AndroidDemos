@@ -90,6 +90,8 @@ public class NavLineRecycleViewManage {
                 if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
                     startDragPosition = viewHolder.getAdapterPosition();//设置开始位置
                     navLineRecyleAdapter.setStartDragPosition(startDragPosition);
+                } else if (actionState == ItemTouchHelper.ACTION_STATE_IDLE) {
+                    navLineRecyleAdapter.notifyDataSetChanged();
                 }
             }
 

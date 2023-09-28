@@ -12,6 +12,7 @@ public class ItemData {
     public String title;
     public String content;
     public boolean isStarred;
+    public boolean isSelected = false;
 
     public ItemData(String title, String content, boolean isStarred) {
         this.title = title;
