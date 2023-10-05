@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.androiddemos.R;
+import com.example.androiddemos.network.fragment.CollapsibleRecyclerViewFragment;
 import com.example.androiddemos.network.fragment.OkgoFragment;
 import com.example.androiddemos.network.fragment.RetrofitFragment;
 import com.example.androiddemos.network.fragment.SwitchNavLineFragment;
@@ -37,6 +38,7 @@ public class SetupCenterTabAdapter extends FragmentStateAdapter {
         viewPagerDataList.add(new ViewPagerData(R.drawable.finish, R.string.network_menu_action_okgo));
         viewPagerDataList.add(new ViewPagerData(R.drawable.finish, R.string.network_menu_action_retrofit));
         viewPagerDataList.add(new ViewPagerData(R.drawable.finish, R.string.line_move));
+        viewPagerDataList.add(new ViewPagerData(R.drawable.finish, R.string.line_move));
     }
 
     @NonNull
@@ -49,6 +51,8 @@ public class SetupCenterTabAdapter extends FragmentStateAdapter {
                 return new RetrofitFragment();
             case 2:
                 return new OkgoFragment();
+            case 3:
+                return new CollapsibleRecyclerViewFragment();
             default:
                 return new SwitchNavLineFragment();
         }

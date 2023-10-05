@@ -32,4 +32,5 @@
         <!--        文字大小-->
         <attr name="text_size" format="dimension" />
     </declare-styleable>
+
 </resources>
