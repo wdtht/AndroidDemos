@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androiddemos.R
 import com.example.androiddemos.view.CollapsibleRecyclerView
+import kotlin.properties.Delegates
 
 abstract class CollapsibleRecyclerViewAdapter<EIVH: RecyclerView.ViewHolder, SIVH: RecyclerView.ViewHolder, ItemData: com.example.androiddemos.view.adpter.ItemData>: RecyclerView.Adapter<CollapsibleRecyclerViewAdapter.Companion.ExpandableItemViewHolder<EIVH>>() {
 
@@ -22,9 +23,13 @@ abstract class CollapsibleRecyclerViewAdapter<EIVH: RecyclerView.ViewHolder, SIV
 
     abstract fun getSubItemCount(position: Int): Int
 
+    private var expandableItemId by Delegates.notNull<Int>()
+    var subItemId by Delegates.notNull<Int>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpandableItemViewHolder<EIVH> {
         val collapsibleRecyclerView = parent as CollapsibleRecyclerView
-        val expandableItemId = collapsibleRecyclerView.expandableItemId
+        expandableItemId = collapsibleRecyclerView.expandableItemId
+        subItemId = collapsibleRecyclerView.subItemId
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.collapsible_recycler_view_item, parent, false)
         val expandableItemHeader = LayoutInflater.from(parent.context).inflate(expandableItemId, itemView as ViewGroup, false)
         itemView.addView(expandableItemHeader, 0)
@@ -55,8 +60,7 @@ abstract class CollapsibleRecyclerViewAdapter<EIVH: RecyclerView.ViewHolder, SIV
 
 class SubItemsAdapter<EIVH:RecyclerView.ViewHolder, SIVH: RecyclerView.ViewHolder>(private val collapsibleRecyclerViewAdapter: CollapsibleRecyclerViewAdapter<EIVH,SIVH,ItemData>, private val positionInCollapsibleRecyclerView: Int): RecyclerView.Adapter<SIVH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SIVH {
-        val collapsibleRecyclerView = parent.parent.parent as CollapsibleRecyclerView
-        val subItemId = collapsibleRecyclerView.subItemId
+        val subItemId = collapsibleRecyclerViewAdapter.subItemId
         val subItemView = LayoutInflater.from(parent.context).inflate(subItemId, parent, false)
         return collapsibleRecyclerViewAdapter.onCreateSubItemViewHolder(subItemView)
     }
