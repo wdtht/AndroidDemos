@@ -2,12 +2,14 @@ package com.example.androiddemos.network.fragment
 
 import android.R
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.androiddemos.databinding.FragmentSwitchNavlineBinding
 import com.example.androiddemos.network.Interface.ItemData
+import com.example.androiddemos.util.GrayScaleUtils
 import com.example.androiddemos.view.NavLineRecycleViewManage
 
 
@@ -20,11 +22,12 @@ class SwitchNavLineFragment : Fragment() {
 
     private var _binding: FragmentSwitchNavlineBinding? = null
     private val binding get() = _binding!!
+    private var isGray = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSwitchNavlineBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,6 +45,24 @@ class SwitchNavLineFragment : Fragment() {
         )
         navLineRecycleViewManage.initRecyclerView(itemList)
         navLineRecycleViewManage.initTouchMove()
+
+        binding.btnBecomeGray.setOnClickListener {
+            if(isGray) {
+                Log.i(TAG, "onViewCreated: click becomeGray isGray = true")
+                try {
+                    GrayScaleUtils.restoreView(binding.root)
+                } catch (e: Exception) {
+                    Log.e(TAG, "onViewCreated: ", e)
+                }
+                isGray = false
+                return@setOnClickListener
+            } else {
+                GrayScaleUtils.applyGrayScale(binding.root)
+                binding.btnBecomeGray.isEnabled = true
+                binding.root.isEnabled = true
+                isGray = true
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -19,4 +19,5 @@
     <string name="game_medium">中等</string>
     <string name="title_activity_chat">chatActivity</string>
     <string name="collapsiblerecyclerview">CollapsibleRecyclerView</string>
+    <string name="btnBecomeGray">置灰</string>
 </resources>

@@ -39,7 +39,16 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/color_three_level_word"
         android:textSize="14sp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="48dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBecomeGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/btnBecomeGray"
         />
 
 </RelativeLayout>
